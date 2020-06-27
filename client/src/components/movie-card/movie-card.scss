@@ -1,10 +1,16 @@
 .movie-title {
 	font-weight: bold;
+	font-size: 22px;
 }
 
 .movie-cards {
 	max-width: 25%;
 	margin-top: 10px;
+}
+
+.more-details {
+	position: absolute;
+	top: 555px;
 }
 
 .more-details:hover {

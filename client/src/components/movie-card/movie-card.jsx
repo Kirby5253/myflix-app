@@ -9,15 +9,22 @@ export class MovieCard extends React.Component {
 	render() {
 		const { movie } = this.props;
 
+		const truncateString = (str, num) => {
+			if (str.length <= 70) {
+				return str;
+			}
+			return str.slice(0, 70) + '...';
+		};
+
 		return (
 			<div className="movie-cards">
-				<Card text={'white'} style={{ width: '15rem' }} bg={'dark'}>
+				<Card text={'white'} style={{ width: '15rem', height: '38rem' }} bg={'dark'}>
 					<div className="card-overlay">
 						<Card.Img className="movie-card-img" variant="top" src={movie.ImagePath} />
 					</div>
 					<Card.Body>
 						<Card.Title className="movie-title">{movie.Title}</Card.Title>
-						<Card.Text>{movie.Description}</Card.Text>
+						<Card.Text>{truncateString(movie.Description)}</Card.Text>
 						<Link to={`/movies/${movie._id}`}>
 							<Button className="more-details">More Details</Button>
 						</Link>
