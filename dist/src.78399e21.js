@@ -51134,10 +51134,10 @@ function VisibilityFilterInput(props) {
   return _react.default.createElement(_Form.default.Control, {
     className: "filter",
     onChange: function onChange(e) {
-      return props.setFilter(e.target.value).toLowerCase();
+      return props.setFilter(e.target.value.toLowerCase());
     },
     value: props.visibilityFilter,
-    placeholder: "filter"
+    placeholder: "Filter by Title"
   });
 }
 
@@ -51287,7 +51287,7 @@ function MoviesList(props) {
 
   if (visibilityFilter !== '') {
     filteredMovies = movies.filter(function (m) {
-      return m.Title.toLowerCase().includes(visibilityFilter);
+      return m.Title.toLowerCase().includes(visibilityFilter) || m.Description.toLowerCase().includes(visibilityFilter);
     });
   }
 
@@ -51950,7 +51950,7 @@ exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+var _reactBootstrap = require("react-bootstrap");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -52002,7 +52002,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var user = this.props.user;
       if (!user) return null;
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("div", {
         className: "profile-view"
       }, _react.default.createElement("div", {
         className: "username"
@@ -52026,17 +52026,17 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "button-nav"
       }, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/profile/".concat(user.Username, "/favorites")
-      }, _react.default.createElement(_Button.default, {
+      }, _react.default.createElement(_reactBootstrap.Button, {
         variant: "dark"
       }, "Remove Favorites"))), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/profile/".concat(user.Username, "/update")
-      }, _react.default.createElement(_Button.default, {
+      }, _react.default.createElement(_reactBootstrap.Button, {
         variant: "dark"
       }, "Update Account"))), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/profile/".concat(user.Username, "/delete")
-      }, _react.default.createElement(_Button.default, {
+      }, _react.default.createElement(_reactBootstrap.Button, {
         variant: "dark"
-      }, "Delete Account"))))));
+      }, "Delete Account")))))));
     }
   }]);
 
@@ -52044,7 +52044,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-profile-view/change-profile-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-profile-view/change-profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52587,7 +52587,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick(user) {
           return _this4.logoutUser();
         },
-        href: "/client/"
+        href: "/client"
       }, "Logout"))))) : _react.default.createElement("div", {
         className: "navbar"
       }, _react.default.createElement(_reactBootstrap.Navbar, {
@@ -52626,6 +52626,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           var match = _ref.match;
           // Users can only see their own account info!
           if (match.params.username === storedUser) return _react.default.createElement(_profileView.ProfileView, {
+            movies: movies,
             user: users.find(function (m) {
               return m.Username === match.params.username;
             })
@@ -52875,7 +52876,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51829" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54796" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
