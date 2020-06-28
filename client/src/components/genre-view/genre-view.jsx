@@ -2,10 +2,11 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import './genre-view.scss';
+import { connect } from 'react-redux';
 
 import { Link } from "react-router-dom";
 
-export class GenreView extends React.Component {
+class GenreView extends React.Component {
 	render() {
     const { genre } = this.props;
 
@@ -37,3 +38,5 @@ GenreView.propTypes = {
 		Description: PropTypes.string.isRequired,
 	})
 };
+
+export default connect(null, {})(GenreView);
