@@ -51609,7 +51609,7 @@ MovieView.propTypes = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.RegistrationView = RegistrationView;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -51620,6 +51620,8 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51749,7 +51751,11 @@ RegistrationView.propTypes = {
   setNewUsername: _propTypes.default.string,
   setNewPassword: _propTypes.default.string
 };
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js"}],"components/genre-view/genre-view.scss":[function(require,module,exports) {
+
+var _default = (0, _reactRedux.connect)(null, {})(RegistrationView);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/genre-view/genre-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52440,7 +52446,7 @@ var _loginView = _interopRequireDefault(require("../login-view/login-view"));
 
 var _movieView = require("../movie-view/movie-view");
 
-var _registrationView = require("../registration-view/registration-view");
+var _registrationView = _interopRequireDefault(require("../registration-view/registration-view"));
 
 var _genreView = _interopRequireDefault(require("../genre-view/genre-view"));
 
@@ -52633,7 +52639,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/register",
         render: function render() {
-          if (!user) return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_registrationView.RegistrationView, null));
+          if (!user) return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_registrationView.default, null));
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/profile/:username",
@@ -52891,7 +52897,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55720" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56109" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
