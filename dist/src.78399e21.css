@@ -53,6 +53,11 @@ form {
   place-self: center;
 }
 
+.movie-cards__item {
+  width: 15rem;
+  height: 38rem;
+}
+
 .more-details {
   position: absolute;
   top: 555px;
@@ -126,6 +131,7 @@ div {
   color: white;
   font-size: 20px;
   border-radius: 20px;
+  margin-top: 74px;
 }
 .director-view {
   width: 75%;
@@ -134,6 +140,7 @@ div {
   color: white;
   font-size: 20px;
   border-radius: 20px;
+  margin-top: 74px;
 }
 .profile-view {
   margin-top: 69px;

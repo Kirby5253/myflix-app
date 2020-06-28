@@ -2,10 +2,11 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import './director-view.scss';
+import { connect } from 'react-redux';
 
 import { Link } from "react-router-dom";
 
-export class DirectorView extends React.Component {
+class DirectorView extends React.Component {
 	constructor() {
 		super();
 
@@ -41,3 +42,5 @@ export class DirectorView extends React.Component {
 		);
 	}
 }
+
+export default connect(null, {})(DirectorView);

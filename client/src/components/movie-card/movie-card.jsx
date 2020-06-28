@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import './movie-card.scss';
-
 import { Link } from 'react-router-dom';
 
-export class MovieCard extends React.Component {
+import { connect } from 'react-redux';
+
+class MovieCard extends React.Component {
 	render() {
 		const { movie } = this.props;
 
@@ -18,7 +19,7 @@ export class MovieCard extends React.Component {
 
 		return (
 			<div className="movie-cards">
-				<Card text={'white'} style={{ width: '15rem', height: '38rem' }} bg={'dark'}>
+				<Card text={'white'} className="movie-cards__item" bg={'dark'}>
 					<div className="card-overlay">
 						<Card.Img className="movie-card-img" variant="top" src={movie.ImagePath} />
 					</div>
@@ -42,3 +43,5 @@ MovieCard.propTypes = {
 		ImagePath: PropTypes.string.isRequired
 	}).isRequired
 };
+
+export default connect(null, {})(MovieCard);
