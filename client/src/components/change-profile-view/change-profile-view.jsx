@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import './change-profile-view.scss';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export function ChangeProfile(props) {
+function ChangeProfile(props) {
 	const [ newUsername, setNewUsername ] = useState('');
 	const [ newPassword, setNewPassword ] = useState('');
 	const [ newEmail, setNewEmail ] = useState('');
@@ -84,6 +85,7 @@ export function ChangeProfile(props) {
 						placeholder="Email"
 						value={newEmail}
 						onChange={(e) => setNewEmail(e.target.value)}
+						required
 					/>
 				</Form.Group>
 
@@ -94,6 +96,7 @@ export function ChangeProfile(props) {
 						placeholder="YYYY-MM-DD"
 						value={newBirthDate}
 						onChange={(e) => setNewBirthDate(e.target.value)}
+						required
 					/>
 				</Form.Group>
 
@@ -107,3 +110,5 @@ export function ChangeProfile(props) {
 		</div>
 	);
 }
+
+export default connect(null, {})(ChangeProfile);

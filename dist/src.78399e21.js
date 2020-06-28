@@ -52082,7 +52082,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ChangeProfile = ChangeProfile;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -52097,6 +52097,8 @@ var _axios = _interopRequireDefault(require("axios"));
 require("./change-profile-view.scss");
 
 var _reactRouterDom = require("react-router-dom");
+
+var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52200,7 +52202,8 @@ function ChangeProfile(props) {
     value: newEmail,
     onChange: function onChange(e) {
       return setNewEmail(e.target.value);
-    }
+    },
+    required: true
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
@@ -52209,7 +52212,8 @@ function ChangeProfile(props) {
     value: newBirthDate,
     onChange: function onChange(e) {
       return setNewBirthDate(e.target.value);
-    }
+    },
+    required: true
   })), _react.default.createElement(_Button.default, {
     onClick: handleProfileUpdate,
     variant: "primary",
@@ -52220,7 +52224,11 @@ function ChangeProfile(props) {
     variant: "link"
   }, "Cancel Update"))));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./change-profile-view.scss":"components/change-profile-view/change-profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/delete-profile-view/delete-profile-view.scss":[function(require,module,exports) {
+
+var _default = (0, _reactRedux.connect)(null, {})(ChangeProfile);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./change-profile-view.scss":"components/change-profile-view/change-profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/delete-profile-view/delete-profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52458,7 +52466,7 @@ var _directorView = _interopRequireDefault(require("../director-view/director-vi
 
 var _profileView = _interopRequireDefault(require("../profile-view/profile-view"));
 
-var _changeProfileView = require("../change-profile-view/change-profile-view");
+var _changeProfileView = _interopRequireDefault(require("../change-profile-view/change-profile-view"));
 
 var _deleteProfileView = require("../delete-profile-view/delete-profile-view");
 
@@ -52662,7 +52670,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render(_ref2) {
           var match = _ref2.match;
           // Users can only see their own account info!
-          if (match.params.username === storedUser) return _react.default.createElement(_changeProfileView.ChangeProfile, {
+          if (match.params.username === storedUser) return _react.default.createElement(_changeProfileView.default, {
             user: users.find(function (m) {
               return m.Username === match.params.username;
             })
@@ -52901,7 +52909,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56267" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56766" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
