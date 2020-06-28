@@ -51760,7 +51760,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.GenreView = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -51769,6 +51769,8 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 require("./genre-view.scss");
+
+var _reactRedux = require("react-redux");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -51837,14 +51839,17 @@ var GenreView = /*#__PURE__*/function (_React$Component) {
   return GenreView;
 }(_react.default.Component);
 
-exports.GenreView = GenreView;
 GenreView.propTypes = {
   genre: _propTypes.default.shape({
     Name: _propTypes.default.string.isRequired,
     Description: _propTypes.default.string.isRequired
   })
 };
-},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","./genre-view.scss":"components/genre-view/genre-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
+
+var _default = (0, _reactRedux.connect)(null, {})(GenreView);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","./genre-view.scss":"components/genre-view/genre-view.scss","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52433,7 +52438,7 @@ var _movieView = require("../movie-view/movie-view");
 
 var _registrationView = require("../registration-view/registration-view");
 
-var _genreView = require("../genre-view/genre-view");
+var _genreView = _interopRequireDefault(require("../genre-view/genre-view"));
 
 var _directorView = require("../director-view/director-view");
 
@@ -52698,7 +52703,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           if (!movies) return _react.default.createElement("div", {
             className: "main-view"
           });
-          return _react.default.createElement(_genreView.GenreView, {
+          return _react.default.createElement(_genreView.default, {
             genre: movies.find(function (m) {
               return m.Genre.Name === match.params.name;
             }).Genre
