@@ -14,7 +14,7 @@ import LoginView from '../login-view/login-view';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import GenreView from '../genre-view/genre-view';
-import { DirectorView } from '../director-view/director-view';
+import DirectorView from '../director-view/director-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { ChangeProfile } from '../change-profile-view/change-profile-view';
 import { DeleteProfile } from '../delete-profile-view/delete-profile-view';

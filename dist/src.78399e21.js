@@ -51860,7 +51860,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DirectorView = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -51869,6 +51869,8 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 require("./director-view.scss");
+
+var _reactRedux = require("react-redux");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -51947,8 +51949,10 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
   return DirectorView;
 }(_react.default.Component);
 
-exports.DirectorView = DirectorView;
-},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","./director-view.scss":"components/director-view/director-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
+var _default = (0, _reactRedux.connect)(null, {})(DirectorView);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","./director-view.scss":"components/director-view/director-view.scss","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52440,7 +52444,7 @@ var _registrationView = require("../registration-view/registration-view");
 
 var _genreView = _interopRequireDefault(require("../genre-view/genre-view"));
 
-var _directorView = require("../director-view/director-view");
+var _directorView = _interopRequireDefault(require("../director-view/director-view"));
 
 var _profileView = require("../profile-view/profile-view");
 
@@ -52716,7 +52720,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           if (!movies) return _react.default.createElement("div", {
             className: "main-view"
           });
-          return _react.default.createElement(_directorView.DirectorView, {
+          return _react.default.createElement(_directorView.default, {
             director: movies.find(function (m) {
               return m.Director.Name === match.params.name;
             }).Director
@@ -52887,7 +52891,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53297" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55720" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
