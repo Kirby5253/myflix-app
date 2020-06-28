@@ -10,9 +10,9 @@ function VisibilityFilterInput(props) {
 	return (
 		<Form.Control
 			className="filter"
-			onChange={(e) => props.setFilter(e.target.value).toLowerCase()}
+			onChange={(e) => props.setFilter(e.target.value.toLowerCase())}
 			value={props.visibilityFilter}
-			placeholder="filter"
+			placeholder="Filter by Title"
 		/>
 	);
 }
