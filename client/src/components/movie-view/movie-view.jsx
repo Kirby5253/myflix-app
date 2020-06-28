@@ -3,11 +3,10 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import './movie-view.scss';
 import axios from 'axios';
-import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-class MovieView extends React.Component {
+export class MovieView extends React.Component {
 	constructor() {
 		super();
 
@@ -99,5 +98,3 @@ MovieView.propTypes = {
 		Actors: PropTypes.array
 	})
 };
-
-export default connect(null, {})(MovieView);

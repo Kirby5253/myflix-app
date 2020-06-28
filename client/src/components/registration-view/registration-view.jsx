@@ -3,9 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { connect } from 'react-redux';
 
-function RegistrationView(props) {
+export function RegistrationView(props) {
 	const user = localStorage.getItem('user');
 	const [ newUsername, setNewUsername ] = useState('');
 	const [ newPassword, setNewPassword ] = useState('');
@@ -107,5 +106,3 @@ RegistrationView.propTypes = {
 	setNewUsername: PropTypes.string,
 	setNewPassword: PropTypes.string
 };
-
-export default connect(null, {})(RegistrationView);

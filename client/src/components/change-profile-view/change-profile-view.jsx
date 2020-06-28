@@ -4,10 +4,9 @@ import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './change-profile-view.scss';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-function ChangeProfile(props) {
+export function ChangeProfile(props) {
 	const [ newUsername, setNewUsername ] = useState('');
 	const [ newPassword, setNewPassword ] = useState('');
 	const [ newEmail, setNewEmail ] = useState('');
@@ -108,5 +107,3 @@ function ChangeProfile(props) {
 		</div>
 	);
 }
-
-export default connect(null, {})(ChangeProfile);

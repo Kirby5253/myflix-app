@@ -4,9 +4,8 @@ import Button from 'react-bootstrap/Button';
 import './delete-profile-view.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-class DeleteProfile extends React.Component {
+export class DeleteProfile extends React.Component {
 	render() {
 		const { user, onDelete } = this.props;
 		const token = localStorage.getItem('token');
@@ -49,5 +48,3 @@ class DeleteProfile extends React.Component {
 		);
 	}
 }
-
-export default connect(null, {})(DeleteProfile);

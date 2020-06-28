@@ -2,10 +2,10 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import './director-view.scss';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-class DirectorView extends React.Component {
+import { Link } from "react-router-dom";
+
+export class DirectorView extends React.Component {
 	constructor() {
 		super();
 
@@ -13,7 +13,7 @@ class DirectorView extends React.Component {
 	}
 
 	render() {
-		const { director } = this.props;
+    const { director } = this.props;
 
 		return (
 			<div className="director-view">
@@ -21,23 +21,23 @@ class DirectorView extends React.Component {
 					<span className="label">Director Name: </span>
 					<span className="value">{director.Name}</span>
 				</div>
-				<br />
+        <br />
 				<div className="director-bio">
 					<span className="label">Biography: </span>
 					<span className="value">{director.Bio}</span>
 				</div>
-				<br />
-				<div className="director-birth">
+        <br />
+        <div className="director-birth">
 					<span className="label">Born: </span>
 					<span className="value">{director.Birth}</span>
 				</div>
 				<br />
 				<Link to={`/`} className="home-button">
-					<Button variant="link">Home</Button>
+					<Button variant="link">
+						Home
+					</Button>
 				</Link>
 			</div>
 		);
 	}
 }
-
-export default connect(null, {})(DirectorView);

@@ -4,9 +4,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-function LoginView(props) {
+export function LoginView(props) {
 	const [ username, setUsername ] = useState('');
 	const [ password, setPassword ] = useState('');
 
@@ -92,5 +91,3 @@ LoginView.propTypes = {
 	setUsername: PropTypes.string,
 	setPassword: PropTypes.string
 };
-
-export default connect(null, {})(LoginView);

@@ -2,10 +2,9 @@ import React from 'react';
 import { Button, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import './profile-view.scss';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-class ProfileView extends React.Component {
+export class ProfileView extends React.Component {
 	constructor() {
 		super();
 
@@ -56,5 +55,3 @@ class ProfileView extends React.Component {
 		);
 	}
 }
-
-export default connect(null, {})(ProfileView);
