@@ -114,7 +114,7 @@ class MainView extends React.Component {
 								<Nav className="mr-auto">
 									<Nav.Link href="/client/">Movies</Nav.Link>
 									<Nav.Link href={`/client/profile/${user}`}>Account</Nav.Link>
-									<Nav.Link onClick={(user) => this.logoutUser()} href="/client/">
+									<Nav.Link onClick={(user) => this.logoutUser()} href="/client">
 										Logout
 									</Nav.Link>
 								</Nav>
@@ -165,7 +165,10 @@ class MainView extends React.Component {
 								// Users can only see their own account info!
 								if (match.params.username === storedUser)
 									return (
-										<ProfileView user={users.find((m) => m.Username === match.params.username)} />
+										<ProfileView
+											movies={movies}
+											user={users.find((m) => m.Username === match.params.username)}
+										/>
 									);
 							}}
 						/>
