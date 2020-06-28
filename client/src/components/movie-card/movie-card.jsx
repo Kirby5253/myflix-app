@@ -19,7 +19,7 @@ class MovieCard extends React.Component {
 
 		return (
 			<div className="movie-cards">
-				<Card text={'white'} style={{ width: '15rem', height: '38rem' }} bg={'dark'}>
+				<Card text={'white'} className="movie-cards__item" bg={'dark'}>
 					<div className="card-overlay">
 						<Card.Img className="movie-card-img" variant="top" src={movie.ImagePath} />
 					</div>

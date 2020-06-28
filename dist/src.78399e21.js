@@ -51223,10 +51223,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         className: "movie-cards"
       }, _react.default.createElement(_reactBootstrap.Card, {
         text: 'white',
-        style: {
-          width: '15rem',
-          height: '38rem'
-        },
+        className: "movie-cards__item",
         bg: 'dark'
       }, _react.default.createElement("div", {
         className: "card-overlay"
