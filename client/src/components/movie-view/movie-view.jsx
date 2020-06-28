@@ -40,8 +40,6 @@ export class MovieView extends React.Component {
 
 		if (!movie) return null;
 
-		console.log(user.Favorite_Movies);
-
 		return (
 			<div className="movie-view">
 				<img className="movie-poster" src={movie.ImagePath} />

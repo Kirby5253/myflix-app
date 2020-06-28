@@ -51208,12 +51208,22 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var movie = this.props.movie;
+
+      var truncateString = function truncateString(str, num) {
+        if (str.length <= 70) {
+          return str;
+        }
+
+        return str.slice(0, 70) + '...';
+      };
+
       return _react.default.createElement("div", {
         className: "movie-cards"
       }, _react.default.createElement(_reactBootstrap.Card, {
         text: 'white',
         style: {
-          width: '15rem'
+          width: '15rem',
+          height: '38rem'
         },
         bg: 'dark'
       }, _react.default.createElement("div", {
@@ -51224,7 +51234,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         src: movie.ImagePath
       })), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "movie-title"
-      }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), _react.default.createElement(_reactRouterDom.Link, {
+      }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, null, truncateString(movie.Description)), _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "more-details"
@@ -51517,7 +51527,6 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       };
 
       if (!movie) return null;
-      console.log(user.Favorite_Movies);
       return _react.default.createElement("div", {
         className: "movie-view"
       }, _react.default.createElement("img", {
@@ -51663,7 +51672,7 @@ function RegistrationView(props) {
 
       alert('User ' + newUsername + ' was successfully created. Please login with your new username and password.');
     }).catch(function (e) {
-      console.log('error registering the user');
+      console.log('error registering the user', e);
     });
   };
 
@@ -52838,7 +52847,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 var container = document.getElementsByClassName('app-container')[0]; // Tell React to render our app in the root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -52866,7 +52875,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61152" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51829" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -53042,5 +53051,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map
