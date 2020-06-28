@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import './movie-card.scss';
-
 import { Link } from 'react-router-dom';
 
-export class MovieCard extends React.Component {
+import { connect } from 'react-redux';
+
+class MovieCard extends React.Component {
 	render() {
 		const { movie } = this.props;
 
@@ -42,3 +43,5 @@ MovieCard.propTypes = {
 		ImagePath: PropTypes.string.isRequired
 	}).isRequired
 };
+
+export default connect(null, {})(MovieCard);

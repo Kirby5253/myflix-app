@@ -11,7 +11,6 @@ import { setMovies } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 import LoginView from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { GenreView } from '../genre-view/genre-view';
