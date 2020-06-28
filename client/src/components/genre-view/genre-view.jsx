@@ -2,20 +2,21 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import './genre-view.scss';
+import { connect } from 'react-redux';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-export class GenreView extends React.Component {
+class GenreView extends React.Component {
 	render() {
-    const { genre } = this.props;
+		const { genre } = this.props;
 
-    
 		return (
 			<div className="genre-view">
 				<div className="genre-name">
 					<span className="label">Genre Name: </span>
 					<span className="value">{genre.Name}</span>
-				</div> <br />
+				</div>{' '}
+				<br />
 				<div className="movie-description">
 					<span className="label">Description: </span>
 					<span className="value">{genre.Description}</span>
@@ -34,6 +35,8 @@ export class GenreView extends React.Component {
 GenreView.propTypes = {
 	genre: PropTypes.shape({
 		Name: PropTypes.string.isRequired,
-		Description: PropTypes.string.isRequired,
+		Description: PropTypes.string.isRequired
 	})
 };
+
+export default connect(null, {})(GenreView);

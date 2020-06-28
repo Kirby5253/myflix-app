@@ -1,6 +1,6 @@
-.movie-title {
+.movie-title__card {
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 20px;
 }
 
 .movie-cards {
@@ -29,4 +29,9 @@
 .filter {
 	margin-top: 69px;
 	text-transform: capitalize;
+}
+
+.movie-card__item {
+	width: 15rem;
+	height: 38rem;
 }

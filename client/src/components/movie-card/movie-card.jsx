@@ -2,28 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import './movie-card.scss';
+import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-export class MovieCard extends React.Component {
+class MovieCard extends React.Component {
 	render() {
 		const { movie } = this.props;
 
 		const truncateString = (str, num) => {
-			if (str.length <= 70) {
+			if (str.length <= 90) {
 				return str;
 			}
-			return str.slice(0, 70) + '...';
+			return str.slice(0, 110) + '...';
 		};
 
 		return (
 			<div className="movie-cards">
-				<Card text={'white'} style={{ width: '15rem', height: '38rem' }} bg={'dark'}>
+				<Card text={'white'} className="movie-card__item" bg={'dark'}>
 					<div className="card-overlay">
 						<Card.Img className="movie-card-img" variant="top" src={movie.ImagePath} />
 					</div>
 					<Card.Body>
-						<Card.Title className="movie-title">{movie.Title}</Card.Title>
+						<Card.Title className="movie-title__card">{movie.Title}</Card.Title>
 						<Card.Text>{truncateString(movie.Description)}</Card.Text>
 						<Link to={`/movies/${movie._id}`}>
 							<Button className="more-details">More Details</Button>
@@ -42,3 +43,5 @@ MovieCard.propTypes = {
 		ImagePath: PropTypes.string.isRequired
 	}).isRequired
 };
+
+export default connect(null, {})(MovieCard);
