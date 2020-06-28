@@ -51969,7 +51969,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProfileView = void 0;
+exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -51978,6 +51978,8 @@ var _reactBootstrap = require("react-bootstrap");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 require("./profile-view.scss");
+
+var _reactRedux = require("react-redux");
 
 var _reactRouterDom = require("react-router-dom");
 
@@ -52066,8 +52068,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   return ProfileView;
 }(_react.default.Component);
 
-exports.ProfileView = ProfileView;
-},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-profile-view/change-profile-view.scss":[function(require,module,exports) {
+var _default = (0, _reactRedux.connect)(null, {})(ProfileView);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-profile-view/change-profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -52452,7 +52456,7 @@ var _genreView = _interopRequireDefault(require("../genre-view/genre-view"));
 
 var _directorView = _interopRequireDefault(require("../director-view/director-view"));
 
-var _profileView = require("../profile-view/profile-view");
+var _profileView = _interopRequireDefault(require("../profile-view/profile-view"));
 
 var _changeProfileView = require("../change-profile-view/change-profile-view");
 
@@ -52646,7 +52650,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render(_ref) {
           var match = _ref.match;
           // Users can only see their own account info!
-          if (match.params.username === storedUser) return _react.default.createElement(_profileView.ProfileView, {
+          if (match.params.username === storedUser) return _react.default.createElement(_profileView.default, {
             movies: movies,
             user: users.find(function (m) {
               return m.Username === match.params.username;
@@ -52897,7 +52901,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56109" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56267" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
