@@ -28,19 +28,21 @@ function RegistrationView(props) {
 				const data = response.data;
 				console.log(data);
 				window.open('/client', '_self'); // Self to open in the current window
-				if(data){
+				if (data) {
 					alert(
 						'User ' +
 							newUsername +
-							' was successfully created. Please login with your new username and password.');
-					}
+							' was successfully created. Please login with your new username and password.'
+					);
+				}
 			})
 			.catch((e) => {
 				console.log('error registering the user', e);
 				alert(
 					'User ' +
 						newUsername +
-						' is already taken or one of the fields does not meet our membership criteria. Please try to create a new username and verify the information in each field for accuracy.')
+						' is already taken or one of the fields does not meet our membership criteria. Please try to create a new username and verify the information in each field for accuracy.'
+				);
 			});
 	};
 
@@ -65,8 +67,16 @@ function RegistrationView(props) {
 						required
 					/>
 				</Form.Group>
-				{newUsername.length < 5 ? <div className="form-validation">Please create a username with at least 5 characters...</div>: <div className="form-validation__good">Username meets all criteria!</div>}
-				{!newUsername && newPassword ?<div className="form-validation">Please create a username...(Make sure to only use letters or numbers.)</div>: null}
+				{newUsername.length < 5 ? (
+					<div className="form-validation">Please create a username with at least 5 characters...</div>
+				) : (
+					<div className="form-validation__good">Username meets all criteria!</div>
+				)}
+				{!newUsername && newPassword ? (
+					<div className="form-validation">
+						Please create a username...(Make sure to only use letters or numbers.)
+					</div>
+				) : null}
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Create Password</Form.Label>
@@ -78,7 +88,13 @@ function RegistrationView(props) {
 						required
 					/>
 				</Form.Group>
-				{newPassword.length < 4 ?<div className="form-validation">Password is required and must contain at least 4 characters...</div>: <div className="form-validation__good">Password meets all criteria!</div>}
+				{newPassword.length < 4 ? (
+					<div className="form-validation">
+						Password is required and must contain at least 4 characters...
+					</div>
+				) : (
+					<div className="form-validation__good">Password meets all criteria!</div>
+				)}
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Email</Form.Label>
@@ -87,29 +103,46 @@ function RegistrationView(props) {
 						placeholder="Email"
 						value={newEmail}
 						onChange={(e) => setNewEmail(e.target.value)}
-						
 					/>
 				</Form.Group>
-				{newEmail.includes('@') ? <div className="form-validation__good">Email meets all criteria!</div>: <div className="form-validation">Email is required...</div>}
+				{newEmail.includes('@') ? (
+					<div className="form-validation__good">Email meets all criteria!</div>
+				) : (
+					<div className="form-validation">Email is required...</div>
+				)}
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Date of Birth</Form.Label>
 					<Form.Control
-						type="text"
+						type="date"
 						placeholder="YYYY-MM-DD"
 						value={newBirthDate}
 						onChange={(e) => setNewBirthDate(e.target.value)}
 					/>
 				</Form.Group>
-				{newBirthDate.length >= 8 ? <div className="form-validation__good">Birthday meets all criteria!</div>: <div className="form-validation">Birthday is required...</div>}
+				{newBirthDate.length >= 8 ? (
+					<div className="form-validation__good">Birthday meets all criteria!</div>
+				) : (
+					<div className="form-validation">Birthday is required...</div>
+				)}
 
-				{newUsername.length >= 5 && newPassword.length >= 4 && newEmail.includes('@') && newBirthDate.length >=8 ? 
-				<Button className="register-button" variant="primary" type="button" onClick={handleRegistrationSubmit}>
-					Register
-				</Button>:
-				<Button className="register-button disabled" variant="dark" type="button">
-				Register
-			</Button>}
+				{newUsername.length >= 5 &&
+				newPassword.length >= 4 &&
+				newEmail.includes('@') &&
+				newBirthDate.length >= 8 ? (
+					<Button
+						className="register-button"
+						variant="primary"
+						type="button"
+						onClick={handleRegistrationSubmit}
+					>
+						Register
+					</Button>
+				) : (
+					<Button className="register-button disabled" variant="dark" type="button">
+						Register
+					</Button>
+				)}
 				<Button className="login-button" variant="link" type="button" onClick={cancelRegistration}>
 					Already a user? Click here to sign in.
 				</Button>

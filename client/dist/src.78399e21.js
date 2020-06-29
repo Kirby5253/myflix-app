@@ -51767,7 +51767,7 @@ function RegistrationView(props) {
   }, "Email is required..."), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
-    type: "text",
+    type: "date",
     placeholder: "YYYY-MM-DD",
     value: newBirthDate,
     onChange: function onChange(e) {
@@ -52277,7 +52277,7 @@ function ChangeProfile(props) {
   }, "Please include a valid email."), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
-    type: "text",
+    type: "date",
     placeholder: "YYYY-MM-DD",
     value: newBirthDate,
     onChange: function onChange(e) {
@@ -53024,7 +53024,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60489" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63738" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
