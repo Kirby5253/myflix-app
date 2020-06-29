@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 function LoginView(props) {
 	const [ username, setUsername ] = useState('');
 	const [ password, setPassword ] = useState('');
+	const storedUser = localStorage.getItem('user');
 
 	// Has ability to login with random credentials for existing user, no functionality for new users yet
 	const handleSubmit = (e) => {
@@ -47,6 +48,8 @@ function LoginView(props) {
 				});
 		}
 	};
+
+	if (storedUser) return null;
 
 	return (
 		<div className="login-form">
