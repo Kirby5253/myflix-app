@@ -51697,10 +51697,12 @@ function RegistrationView(props) {
       console.log(data);
       window.open('/client', '_self'); // Self to open in the current window
 
-      alert('User ' + newUsername + ' was successfully created. Please login with your new username and password.');
+      if (data) {
+        alert('User ' + newUsername + ' was successfully created. Please login with your new username and password.');
+      }
     }).catch(function (e) {
       console.log('error registering the user', e);
-      alert('User ' + newUsername + ' is already taken or does not meet our username criteria. Please try a new username.');
+      alert('User ' + newUsername + ' is already taken or one of the fields does not meet our membership criteria. Please try to create a new username and verify the information in each field for accuracy.');
     });
   };
 
@@ -51740,9 +51742,11 @@ function RegistrationView(props) {
       return setNewPassword(e.target.value);
     },
     required: true
-  })), !newPassword ? _react.default.createElement("div", {
+  })), newPassword.length < 4 ? _react.default.createElement("div", {
     className: "form-validation"
-  }, "Password is required...") : null, _react.default.createElement(_Form.default.Group, {
+  }, "Password is required and must contain at least 4 characters...") : _react.default.createElement("div", {
+    className: "form-validation__good"
+  }, "Password meets all criteria!"), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Email"), _react.default.createElement(_Form.default.Control, {
     type: "email",
@@ -51768,11 +51772,15 @@ function RegistrationView(props) {
     className: "form-validation__good"
   }, "Birthday meets all criteria!") : _react.default.createElement("div", {
     className: "form-validation"
-  }, "Birthday is required..."), _react.default.createElement(_Button.default, {
-    className: "login-button",
-    variant: "dark",
+  }, "Birthday is required..."), newUsername.length >= 5 && newPassword.length >= 4 && newEmail.includes('@') && newBirthDate.length >= 8 ? _react.default.createElement(_Button.default, {
+    className: "register-button",
+    variant: "primary",
     type: "button",
     onClick: handleRegistrationSubmit
+  }, "Register") : _react.default.createElement(_Button.default, {
+    className: "register-button disabled",
+    variant: "dark",
+    type: "button"
   }, "Register"), _react.default.createElement(_Button.default, {
     className: "login-button",
     variant: "link",
