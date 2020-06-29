@@ -1,6 +1,7 @@
 .movie-title__card {
 	font-weight: bold;
 	font-size: 20px;
+	margin-top: -12px;
 }
 
 .movie-cards {
@@ -15,8 +16,8 @@
 
 .more-details {
 	position: absolute;
-  bottom: 19px;
-  left: 19px;
+	bottom: 19px;
+	left: 19px;
 }
 
 .more-details:hover {
@@ -35,4 +36,8 @@
 .filter {
 	margin-top: 69px;
 	text-transform: capitalize;
+}
+
+.card-text {
+	margin-top: -10px;
 }
