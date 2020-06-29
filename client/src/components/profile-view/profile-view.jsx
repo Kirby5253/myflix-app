@@ -13,9 +13,12 @@ class ProfileView extends React.Component {
 	}
 
 	render() {
-		const { user } = this.props;
+		const { user, favList } = this.props;
+		const storedUser = localStorage.getItem('user');
 
-		if (!user) return null;
+		let favorites = user.Favorite_Movies;
+
+		if(!storedUser) return null;
 
 		return (
 			<Container>
@@ -30,7 +33,7 @@ class ProfileView extends React.Component {
 					</div>
 					<div className="user-favorites">
 						<span className="profile-label">Favorites: </span>
-						<span className="value">{user.Favorite_Movies.join(',  ')}</span>
+						<span className="value">{favorites? favorites.join(',  '): <div>No favorites to show.</div>}</span>
 					</div>
 					<div className="button-nav">
 						<ul>
@@ -57,4 +60,12 @@ class ProfileView extends React.Component {
 	}
 }
 
-export default connect(null, {})(ProfileView);
+ProfileView.propTypes = {
+	user: PropTypes.string
+};
+
+let mapStateToProps = (state) => {
+	return { user: state.userInfo };
+};
+
+export default connect(mapStateToProps, {})(ProfileView);

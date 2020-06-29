@@ -10,7 +10,6 @@ class DeleteProfile extends React.Component {
 	render() {
 		const { user, onDelete } = this.props;
 		const token = localStorage.getItem('token');
-		console.log(token);
 
 		const handleDelete = (e) => {
 			axios
@@ -50,4 +49,13 @@ class DeleteProfile extends React.Component {
 	}
 }
 
-export default connect(null, {})(DeleteProfile);
+DeleteProfile.propTypes = {
+	user: PropTypes.object
+};
+
+
+let mapStateToProps = (state) => {
+	return { user: state.userInfo };
+};
+
+export default connect(mapStateToProps, {})(DeleteProfile);

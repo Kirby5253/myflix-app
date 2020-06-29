@@ -45,7 +45,7 @@ class MovieView extends React.Component {
 				<img className="movie-poster" src={movie.ImagePath} />
 				<div className="movie-title">
 					<span className="label">Title: </span>
-					<span className="value">{movie.Title}</span>
+					<span className="movie-title">{movie.Title}</span>
 				</div>
 				<div className="movie-description">
 					<span className="label">Description: </span>

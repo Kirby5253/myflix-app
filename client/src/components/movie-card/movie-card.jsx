@@ -11,10 +11,10 @@ class MovieCard extends React.Component {
 		const { movie } = this.props;
 
 		const truncateString = (str, num) => {
-			if (str.length <= 70) {
+			if (str.length <= 100) {
 				return str;
 			}
-			return str.slice(0, 70) + '...';
+			return str.slice(0, 110) + '...';
 		};
 
 		return (
@@ -24,7 +24,7 @@ class MovieCard extends React.Component {
 						<Card.Img className="movie-card-img" variant="top" src={movie.ImagePath} />
 					</div>
 					<Card.Body>
-						<Card.Title className="movie-title">{movie.Title}</Card.Title>
+						<Card.Title className="movie-title__card">{movie.Title}</Card.Title>
 						<Card.Text>{truncateString(movie.Description)}</Card.Text>
 						<Link to={`/movies/${movie._id}`}>
 							<Button className="more-details">More Details</Button>
