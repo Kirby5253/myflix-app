@@ -14,7 +14,7 @@ class DirectorView extends React.Component {
 	}
 
 	render() {
-    const { director } = this.props;
+		const { director } = this.props;
 
 		return (
 			<div className="director-view">
@@ -32,6 +32,7 @@ class DirectorView extends React.Component {
 					<span className="label">Born: </span>
 					<span className="value">{director.Birth}</span>
 				</div>
+
 				<br />
 				<Link to={`/`} className="home-button">
 					<Button variant="link">
@@ -42,5 +43,15 @@ class DirectorView extends React.Component {
 		);
 	}
 }
+
+DirectorView.propTypes = {
+	director: PropTypes.shape({
+		Name: PropTypes.string.isRequired,
+		Bio: PropTypes.string.isRequired,
+		Birth: PropTypes.string.isRequired
+	}).isRequired
+};
+
+
 
 export default connect(null, {})(DirectorView);

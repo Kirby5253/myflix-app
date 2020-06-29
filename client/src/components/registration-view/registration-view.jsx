@@ -118,9 +118,4 @@ function RegistrationView(props) {
 	);
 }
 
-RegistrationView.propTypes = {
-	setNewUsername: PropTypes.string,
-	setNewPassword: PropTypes.string
-};
-
 export default connect(null, {})(RegistrationView);

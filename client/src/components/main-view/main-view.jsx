@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './main-view.scss';
 import { Nav, Navbar, Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
@@ -18,7 +19,7 @@ import DirectorView from '../director-view/director-view';
 import ProfileView from '../profile-view/profile-view';
 import ChangeProfile from '../change-profile-view/change-profile-view';
 import DeleteProfile from '../delete-profile-view/delete-profile-view';
-import { ChangeFavorites } from '../change-favorites-view/change-favorites-view';
+import ChangeFavorites from '../change-favorites-view/change-favorites-view';
 
 class MainView extends React.Component {
 	constructor() {
@@ -98,8 +99,6 @@ class MainView extends React.Component {
 		// before the data is initially loaded
 		const { user } = this.state;
 		const storedUser = localStorage.getItem('user');
-
-		console.log(userInfo);
 
 		return (
 			<div>
@@ -198,6 +197,7 @@ class MainView extends React.Component {
 							}}
 						/>
 
+						{/* Allow users to remove favorites form their list */}
 						<Route
 							path="/profile/:username/favorites"
 							render={({ match }) => {
@@ -209,6 +209,7 @@ class MainView extends React.Component {
 							}}
 						/>
 
+						{/* Allow users to see details about a movie, and add it to their favorites */}
 						<Route
 							path="/movies/:movieId"
 							render={({ match }) => (
@@ -221,6 +222,7 @@ class MainView extends React.Component {
 							)}
 						/>
 
+						{/* Allow users to see more details about a movie's genre */}
 						<Route
 							path="/genres/:name"
 							render={({ match }) => {
@@ -231,6 +233,7 @@ class MainView extends React.Component {
 							}}
 						/>
 
+						{/* Allow users to see more details about a movie's director */}
 						<Route
 							path="/directors/:name"
 							render={({ match }) => {
@@ -248,6 +251,11 @@ class MainView extends React.Component {
 		);
 	}
 }
+
+MainView.propTypes = {
+	movies: PropTypes.array.isRequired,
+
+};
 
 let mapStateToProps = (state) => {
 	return { movies: state.movies, userInfo: state.userInfo };

@@ -18,8 +18,6 @@ class ProfileView extends React.Component {
 
 		let favorites = user.Favorite_Movies;
 
-		console.log(favorites);
-
 		if(!storedUser) return null;
 
 		return (
@@ -35,7 +33,7 @@ class ProfileView extends React.Component {
 					</div>
 					<div className="user-favorites">
 						<span className="profile-label">Favorites: </span>
-						<span className="value">{favorites}</span>
+						<span className="value">{favorites? favorites.join(',  '): <div>No favorites to show.</div>}</span>
 					</div>
 					<div className="button-nav">
 						<ul>
@@ -61,6 +59,11 @@ class ProfileView extends React.Component {
 		);
 	}
 }
+
+ProfileView.propTypes = {
+	user: PropTypes.string
+};
+
 let mapStateToProps = (state) => {
 	return { user: state.userInfo };
 };
