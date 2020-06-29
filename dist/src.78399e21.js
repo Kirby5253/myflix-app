@@ -51130,8 +51130,6 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _reactRedux = require("react-redux");
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
@@ -51156,7 +51154,7 @@ var _default = (0, _reactRedux.connect)(null, {
 })(VisibilityFilterInput);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","../../actions/actions":"actions/actions.js"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","../../actions/actions":"actions/actions.js"}],"components/movie-card/movie-card.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -51279,6 +51277,8 @@ var _reactRedux = require("react-redux");
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _visibilityFilterInput = _interopRequireDefault(require("../visibility-filter-input/visibility-filter-input"));
 
 var _movieCard = _interopRequireDefault(require("../movie-card/movie-card"));
@@ -51320,10 +51320,15 @@ function MoviesList(props) {
   }), " "));
 }
 
+MoviesList.propTypes = {
+  movies: _propTypes.default.array.isRequired,
+  visibilityFilter: _propTypes.default.string
+};
+
 var _default = (0, _reactRedux.connect)(mapStateToProps)(MoviesList);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../visibility-filter-input/visibility-filter-input":"components/visibility-filter-input/visibility-filter-input.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","../visibility-filter-input/visibility-filter-input":"components/visibility-filter-input/visibility-filter-input.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51789,11 +51794,6 @@ function RegistrationView(props) {
   }, "Already a user? Click here to sign in.")));
 }
 
-RegistrationView.propTypes = {
-  setNewUsername: _propTypes.default.string,
-  setNewPassword: _propTypes.default.string
-};
-
 var _default = (0, _reactRedux.connect)(null, {})(RegistrationView);
 
 exports.default = _default;
@@ -51997,6 +51997,14 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
   return DirectorView;
 }(_react.default.Component);
 
+DirectorView.propTypes = {
+  director: _propTypes.default.shape({
+    Name: _propTypes.default.string.isRequired,
+    Bio: _propTypes.default.string.isRequired,
+    Birth: _propTypes.default.string.isRequired
+  }).isRequired
+};
+
 var _default = (0, _reactRedux.connect)(null, {})(DirectorView);
 
 exports.default = _default;
@@ -52072,7 +52080,6 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           favList = _this$props.favList;
       var storedUser = localStorage.getItem('user');
       var favorites = user.Favorite_Movies;
-      console.log(favorites);
       if (!storedUser) return null;
       return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("div", {
         className: "profile-view"
@@ -52094,7 +52101,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "profile-label"
       }, "Favorites: "), _react.default.createElement("span", {
         className: "value"
-      }, favorites)), _react.default.createElement("div", {
+      }, favorites ? favorites.join(',  ') : _react.default.createElement("div", null, "No favorites to show."))), _react.default.createElement("div", {
         className: "button-nav"
       }, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/profile/".concat(user.Username, "/favorites")
@@ -52114,6 +52121,10 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
 
   return ProfileView;
 }(_react.default.Component);
+
+ProfileView.propTypes = {
+  user: _propTypes.default.string
+};
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -52227,7 +52238,7 @@ function ChangeProfile(props) {
     className: "update-form"
   }, _react.default.createElement(_Form.default, {
     className: "change-form"
-  }, _react.default.createElement(_Form.default.Label, null, _react.default.createElement("h3", null, "Update User Info", _react.default.createElement("br", null), " (All fields are required)")), _react.default.createElement(_Form.default.Group, {
+  }, _react.default.createElement(_Form.default.Label, null, _react.default.createElement("h3", null, "Update User Info", _react.default.createElement("br", null))), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "New Username:"), _react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -52237,7 +52248,9 @@ function ChangeProfile(props) {
       return setNewUsername(e.target.value);
     },
     required: true
-  })), _react.default.createElement(_Form.default.Group, {
+  })), newUsername.length < 5 ? _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Please include a username with at least 5 characters.") : null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "New Password:"), _react.default.createElement(_Form.default.Control, {
     type: "password",
@@ -52247,7 +52260,9 @@ function ChangeProfile(props) {
       return setNewPassword(e.target.value);
     },
     required: true
-  })), _react.default.createElement(_Form.default.Group, {
+  })), newPassword.length < 4 ? _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Please include a password with at least 4 characters.") : null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "New Email"), _react.default.createElement(_Form.default.Control, {
     type: "email",
@@ -52257,7 +52272,9 @@ function ChangeProfile(props) {
       return setNewEmail(e.target.value);
     },
     required: true
-  })), _react.default.createElement(_Form.default.Group, {
+  })), newEmail.length > 5 && newEmail.includes('@') ? null : _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Please include a valid email."), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -52267,10 +52284,17 @@ function ChangeProfile(props) {
       return setNewBirthDate(e.target.value);
     },
     required: true
-  })), _react.default.createElement(_Button.default, {
+  })), newBirthDate.length >= 8 ? null : _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Birthday is required..."), newUsername.length >= 5 && newPassword.length >= 4 && newEmail.includes('@') && newBirthDate.length >= 8 ? _react.default.createElement(_Button.default, {
+    className: "register-button",
     onClick: handleProfileUpdate,
     variant: "primary",
     type: "button"
+  }, "Update Account") : _react.default.createElement(_Button.default, {
+    variant: "primary",
+    type: "button",
+    className: "disabled register-button"
   }, "Update Account"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/profile/".concat(storedUser)
   }, _react.default.createElement(_Button.default, {
@@ -52350,7 +52374,6 @@ var DeleteProfile = /*#__PURE__*/function (_React$Component) {
           user = _this$props.user,
           onDelete = _this$props.onDelete;
       var token = localStorage.getItem('token');
-      console.log(token);
 
       var handleDelete = function handleDelete(e) {
         _axios.default.delete("https://myflixdb5253.herokuapp.com/users/".concat(user.Username), {
@@ -52386,7 +52409,17 @@ var DeleteProfile = /*#__PURE__*/function (_React$Component) {
   return DeleteProfile;
 }(_react.default.Component);
 
-var _default = (0, _reactRedux.connect)(null, {})(DeleteProfile);
+DeleteProfile.propTypes = {
+  user: _propTypes.default.object
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.userInfo
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {})(DeleteProfile);
 
 exports.default = _default;
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./delete-profile-view.scss":"components/delete-profile-view/delete-profile-view.scss","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-favorites-view/change-favorites.scss":[function(require,module,exports) {
@@ -52400,7 +52433,7 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ChangeFavorites = ChangeFavorites;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -52415,6 +52448,8 @@ require("./change-favorites.scss");
 var _axios = _interopRequireDefault(require("axios"));
 
 var _reactRouterDom = require("react-router-dom");
+
+var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52487,7 +52522,17 @@ function ChangeFavorites() {
     variant: "link"
   }, "Cancel Update"))));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./change-favorites.scss":"components/change-favorites-view/change-favorites.scss","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.userInfo
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {})(ChangeFavorites);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./change-favorites.scss":"components/change-favorites-view/change-favorites.scss","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52502,6 +52547,8 @@ var _axios = _interopRequireDefault(require("axios"));
 require("./main-view.scss");
 
 var _reactBootstrap = require("react-bootstrap");
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _reactRedux = require("react-redux");
 
@@ -52527,7 +52574,7 @@ var _changeProfileView = _interopRequireDefault(require("../change-profile-view/
 
 var _deleteProfileView = _interopRequireDefault(require("../delete-profile-view/delete-profile-view"));
 
-var _changeFavoritesView = require("../change-favorites-view/change-favorites-view");
+var _changeFavoritesView = _interopRequireDefault(require("../change-favorites-view/change-favorites-view"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52653,7 +52700,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       var user = this.state.user;
       var storedUser = localStorage.getItem('user');
-      console.log(userInfo);
       return _react.default.createElement("div", null, //Allows the nav bar to not render links until user logs in
       userInfo ? _react.default.createElement("div", {
         className: "navbar"
@@ -52748,7 +52794,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render(_ref4) {
           var match = _ref4.match;
           // Users can only see their own account info!
-          if (match.params.username === storedUser) return _react.default.createElement(_changeFavoritesView.ChangeFavorites, {
+          if (match.params.username === storedUser) return _react.default.createElement(_changeFavoritesView.default, {
             user: userInfo
           });
         }
@@ -52800,6 +52846,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   return MainView;
 }(_react.default.Component);
 
+MainView.propTypes = {
+  movies: _propTypes.default.array.isRequired
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     movies: state.movies,
@@ -52813,7 +52863,7 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
 })(MainView);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./main-view.scss":"components/main-view/main-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../../actions/actions":"actions/actions.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../change-profile-view/change-profile-view":"components/change-profile-view/change-profile-view.jsx","../delete-profile-view/delete-profile-view":"components/delete-profile-view/delete-profile-view.jsx","../change-favorites-view/change-favorites-view":"components/change-favorites-view/change-favorites-view.jsx"}],"reducers/reducers.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./main-view.scss":"components/main-view/main-view.scss","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../../actions/actions":"actions/actions.js","../movies-list/movies-list":"components/movies-list/movies-list.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../change-profile-view/change-profile-view":"components/change-profile-view/change-profile-view.jsx","../delete-profile-view/delete-profile-view":"components/delete-profile-view/delete-profile-view.jsx","../change-favorites-view/change-favorites-view":"components/change-favorites-view/change-favorites-view.jsx"}],"reducers/reducers.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
