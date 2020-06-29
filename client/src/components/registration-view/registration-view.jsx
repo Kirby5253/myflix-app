@@ -36,6 +36,11 @@ function RegistrationView(props) {
 			})
 			.catch((e) => {
 				console.log('error registering the user', e);
+				alert(
+					'User ' +
+						newUsername +
+						' is already taken or does not meet our username criteria. Please try a new username.'
+				);
 			});
 	};
 
@@ -60,6 +65,8 @@ function RegistrationView(props) {
 						required
 					/>
 				</Form.Group>
+				{newUsername.length < 5 ? <div className="form-validation">Please create a username with at least 5 characters...</div>: <div className="form-validation__good">Username meets all criteria!</div>}
+				{!newUsername && newPassword ?<div className="form-validation">Please create a username...(Make sure to only use letters or numbers.)</div>: null}
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Create Password</Form.Label>
@@ -71,6 +78,7 @@ function RegistrationView(props) {
 						required
 					/>
 				</Form.Group>
+				{!newPassword ?<div className="form-validation">Password is required...</div>: null}
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Email</Form.Label>
@@ -79,8 +87,10 @@ function RegistrationView(props) {
 						placeholder="Email"
 						value={newEmail}
 						onChange={(e) => setNewEmail(e.target.value)}
+						
 					/>
 				</Form.Group>
+				{newEmail.includes('@') ? <div className="form-validation__good">Email meets all criteria!</div>: <div className="form-validation">Email is required...</div>}
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Date of Birth</Form.Label>
@@ -91,6 +101,7 @@ function RegistrationView(props) {
 						onChange={(e) => setNewBirthDate(e.target.value)}
 					/>
 				</Form.Group>
+				{newBirthDate.length >= 8 ? <div className="form-validation__good">Birthday meets all criteria!</div>: <div className="form-validation">Birthday is required...</div>}
 
 				<Button className="login-button" variant="dark" type="button" onClick={handleRegistrationSubmit}>
 					Register
