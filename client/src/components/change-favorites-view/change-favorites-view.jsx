@@ -5,8 +5,9 @@ import Button from 'react-bootstrap/Button';
 import './change-favorites.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export function ChangeFavorites() {
+function ChangeFavorites() {
 	const [ favoriteId, confirmFavoriteId ] = useState('');
 	const storedUser = localStorage.getItem('user');
 	const token = localStorage.getItem('token');
@@ -58,3 +59,10 @@ export function ChangeFavorites() {
 		</div>
 	);
 }
+
+let mapStateToProps = (state) => {
+	return { user: state.userInfo };
+};
+
+export default connect(mapStateToProps, {})(ChangeFavorites);
+

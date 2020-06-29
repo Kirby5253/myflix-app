@@ -52,7 +52,7 @@ function ChangeProfile(props) {
 			<Form className="change-form">
 				<Form.Label>
 					<h3>
-						Update User Info<br /> (All fields are required)
+						Update User Info<br />
 					</h3>
 				</Form.Label>
 
@@ -66,6 +66,7 @@ function ChangeProfile(props) {
 						required
 					/>
 				</Form.Group>
+				{newUsername.length <5 ? <div className="form-validation">Please include a username with at least 5 characters.</div>: null }
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>New Password:</Form.Label>
@@ -77,6 +78,7 @@ function ChangeProfile(props) {
 						required
 					/>
 				</Form.Group>
+				{newPassword.length <4 ? <div className="form-validation">Please include a password with at least 4 characters.</div>: null }
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>New Email</Form.Label>
@@ -88,6 +90,7 @@ function ChangeProfile(props) {
 						required
 					/>
 				</Form.Group>
+				{newEmail.length >5 && newEmail.includes('@') ? null: <div className="form-validation">Please include a valid email.</div> }
 
 				<Form.Group controlId="formBasicPassword">
 					<Form.Label>Date of Birth</Form.Label>
@@ -99,10 +102,14 @@ function ChangeProfile(props) {
 						required
 					/>
 				</Form.Group>
+				{newBirthDate.length >= 8 ? null: <div className="form-validation">Birthday is required...</div>}
 
-				<Button onClick={handleProfileUpdate} variant="primary" type="button">
+				{newUsername.length >= 5 && newPassword.length >= 4 && newEmail.includes('@') && newBirthDate.length >=8 ? <Button className="register-button" onClick={handleProfileUpdate} variant="primary" type="button">
 					Update Account
-				</Button>
+				</Button>:
+				<Button  variant="primary" type="button" className="disabled register-button">
+				Update Account
+			</Button>}
 				<Link to={`/profile/${storedUser}`}>
 					<Button variant="link">Cancel Update</Button>
 				</Link>
@@ -112,3 +119,5 @@ function ChangeProfile(props) {
 }
 
 export default connect(null, {})(ChangeProfile);
+
+
