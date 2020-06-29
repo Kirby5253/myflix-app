@@ -43,9 +43,24 @@ form {
   display: flex;
   justify-content: center;
 }
-.movie-title {
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+.form-validation {
+  color: red;
+  outline-color: black;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-color: black;
+}
+
+.form-validation__good {
+  color: white;
+}
+.movie-title__card {
   font-weight: bold;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .movie-cards {
@@ -60,7 +75,8 @@ form {
 
 .more-details {
   position: absolute;
-  top: 555px;
+  bottom: 19px;
+  left: 19px;
 }
 
 .more-details:hover {
@@ -114,6 +130,7 @@ div {
 .movie-title {
   font-size: 25px;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 .movie-description,

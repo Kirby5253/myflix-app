@@ -51091,11 +51091,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
-exports.SET_FILTER = exports.SET_MOVIES = void 0;
+exports.setUserInfo = setUserInfo;
+exports.SET_USER_INFO = exports.SET_FILTER = exports.SET_MOVIES = void 0;
 var SET_MOVIES = 'SET_MOVIES';
 exports.SET_MOVIES = SET_MOVIES;
 var SET_FILTER = 'SET_FILTER';
 exports.SET_FILTER = SET_FILTER;
+var SET_USER_INFO = 'SET_USER_INFO';
+exports.SET_USER_INFO = SET_USER_INFO;
 
 function setMovies(value) {
   return {
@@ -51107,6 +51110,13 @@ function setMovies(value) {
 function setFilter(value) {
   return {
     type: SET_FILTER,
+    value: value
+  };
+}
+
+function setUserInfo(value) {
+  return {
+    type: SET_USER_INFO,
     value: value
   };
 }
@@ -51212,11 +51222,11 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       var movie = this.props.movie;
 
       var truncateString = function truncateString(str, num) {
-        if (str.length <= 70) {
+        if (str.length <= 100) {
           return str;
         }
 
-        return str.slice(0, 70) + '...';
+        return str.slice(0, 110) + '...';
       };
 
       return _react.default.createElement("div", {
@@ -51232,7 +51242,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         variant: "top",
         src: movie.ImagePath
       })), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, {
-        className: "movie-title"
+        className: "movie-title__card"
       }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, null, truncateString(movie.Description)), _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_reactBootstrap.Button, {
@@ -51362,8 +51372,9 @@ function LoginView(props) {
   var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
       password = _useState4[0],
-      setPassword = _useState4[1]; // Has ability to login with random credentials for existing user, no functionality for new users yet
+      setPassword = _useState4[1];
 
+  var storedUser = localStorage.getItem('user'); // Has ability to login with random credentials for existing user, no functionality for new users yet
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
@@ -51396,6 +51407,7 @@ function LoginView(props) {
     }
   };
 
+  if (storedUser) return null;
   return _react.default.createElement("div", {
     className: "login-form"
   }, _react.default.createElement(_Form.default, {
@@ -51547,7 +51559,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, _react.default.createElement("span", {
         className: "label"
       }, "Title: "), _react.default.createElement("span", {
-        className: "value"
+        className: "movie-title"
       }, movie.Title)), _react.default.createElement("div", {
         className: "movie-description"
       }, _react.default.createElement("span", {
@@ -51688,6 +51700,7 @@ function RegistrationView(props) {
       alert('User ' + newUsername + ' was successfully created. Please login with your new username and password.');
     }).catch(function (e) {
       console.log('error registering the user', e);
+      alert('User ' + newUsername + ' is already taken or does not meet our username criteria. Please try a new username.');
     });
   };
 
@@ -51711,7 +51724,13 @@ function RegistrationView(props) {
       return setNewUsername(e.target.value);
     },
     required: true
-  })), _react.default.createElement(_Form.default.Group, {
+  })), newUsername.length < 5 ? _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Please create a username with at least 5 characters...") : _react.default.createElement("div", {
+    className: "form-validation__good"
+  }, "Username meets all criteria!"), !newUsername && newPassword ? _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Please create a username...(Make sure to only use letters or numbers.)") : null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Create Password"), _react.default.createElement(_Form.default.Control, {
     type: "password",
@@ -51721,7 +51740,9 @@ function RegistrationView(props) {
       return setNewPassword(e.target.value);
     },
     required: true
-  })), _react.default.createElement(_Form.default.Group, {
+  })), !newPassword ? _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Password is required...") : null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Email"), _react.default.createElement(_Form.default.Control, {
     type: "email",
@@ -51730,7 +51751,11 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setNewEmail(e.target.value);
     }
-  })), _react.default.createElement(_Form.default.Group, {
+  })), newEmail.includes('@') ? _react.default.createElement("div", {
+    className: "form-validation__good"
+  }, "Email meets all criteria!") : _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Email is required..."), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -51739,7 +51764,11 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setNewBirthDate(e.target.value);
     }
-  })), _react.default.createElement(_Button.default, {
+  })), newBirthDate.length >= 8 ? _react.default.createElement("div", {
+    className: "form-validation__good"
+  }, "Birthday meets all criteria!") : _react.default.createElement("div", {
+    className: "form-validation"
+  }, "Birthday is required..."), _react.default.createElement(_Button.default, {
     className: "login-button",
     variant: "dark",
     type: "button",
@@ -52030,8 +52059,13 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   _createClass(ProfileView, [{
     key: "render",
     value: function render() {
-      var user = this.props.user;
-      if (!user) return null;
+      var _this$props = this.props,
+          user = _this$props.user,
+          favList = _this$props.favList;
+      var storedUser = localStorage.getItem('user');
+      var favorites = user.Favorite_Movies;
+      console.log(favorites);
+      if (!storedUser) return null;
       return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("div", {
         className: "profile-view"
       }, _react.default.createElement("div", {
@@ -52052,7 +52086,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "profile-label"
       }, "Favorites: "), _react.default.createElement("span", {
         className: "value"
-      }, user.Favorite_Movies.join(',  '))), _react.default.createElement("div", {
+      }, favorites)), _react.default.createElement("div", {
         className: "button-nav"
       }, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/profile/".concat(user.Username, "/favorites")
@@ -52073,7 +52107,13 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
   return ProfileView;
 }(_react.default.Component);
 
-var _default = (0, _reactRedux.connect)(null, {})(ProfileView);
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.userInfo
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {})(ProfileView);
 
 exports.default = _default;
 },{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","prop-types":"../node_modules/prop-types/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-profile-view/change-profile-view.scss":[function(require,module,exports) {
@@ -52517,8 +52557,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this);
     _this.state = {
-      user: null,
-      users: []
+      user: null
     };
     return _this;
   } // One of the "hooks" available in a React Component
@@ -52529,13 +52568,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var accessToken = localStorage.getItem('token');
+      var storedUser = localStorage.getItem('user');
 
       if (accessToken !== null) {
         this.setState({
           user: localStorage.getItem('user')
         });
         this.getMovies(accessToken);
-        this.getUsers(accessToken);
+        this.getUserInfo(storedUser, accessToken);
       }
     }
   }, {
@@ -52548,7 +52588,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
-      this.getUsers(authData.token);
+      this.getUserInfo(authData.user.Username, authData.token);
     }
   }, {
     key: "getMovies",
@@ -52567,28 +52607,29 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "getUsers",
-    value: function getUsers(token) {
+    key: "getUserInfo",
+    value: function getUserInfo(user, token) {
       var _this3 = this;
 
-      _axios.default.get('https://myflixdb5253.herokuapp.com/users/', {
+      _axios.default.get("https://myflixdb5253.herokuapp.com/users/".concat(user), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        _this3.setState({
-          users: response.data
-        });
+        _this3.props.setUserInfo(response.data);
       }).catch(function (error) {
         console.log(error);
       });
     }
   }, {
+    key: "favoriteList",
+    value: function favoriteList(user) {
+      return user.Favorite_Movies.join(',  ');
+    }
+  }, {
     key: "logoutUser",
     value: function logoutUser(user) {
-      this.setState({
-        user: null
-      });
+      this.props.setUserInfo(null);
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     }
@@ -52597,15 +52638,16 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var movies = this.props.movies; // If the state isn't initialized, this will throw on runtime
+      var _this$props = this.props,
+          movies = _this$props.movies,
+          userInfo = _this$props.userInfo; // If the state isn't initialized, this will throw on runtime
       // before the data is initially loaded
 
-      var _this$state = this.state,
-          user = _this$state.user,
-          users = _this$state.users;
+      var user = this.state.user;
       var storedUser = localStorage.getItem('user');
+      console.log(userInfo);
       return _react.default.createElement("div", null, //Allows the nav bar to not render links until user logs in
-      this.state.user ? _react.default.createElement("div", {
+      userInfo ? _react.default.createElement("div", {
         className: "navbar"
       }, _react.default.createElement(_reactBootstrap.Navbar, {
         fixed: "top",
@@ -52648,7 +52690,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         exact: true,
         path: "/",
         render: function render() {
-          if (!user) return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_loginView.default, {
+          if (!userInfo) return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement(_loginView.default, {
             onLoggedIn: function onLoggedIn(user) {
               return _this4.onLoggedIn(user);
             }
@@ -52668,10 +52710,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           var match = _ref.match;
           // Users can only see their own account info!
           if (match.params.username === storedUser) return _react.default.createElement(_profileView.default, {
-            movies: movies,
-            user: users.find(function (m) {
-              return m.Username === match.params.username;
-            })
+            user: userInfo,
+            favList: _this4.favoriteList
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -52680,9 +52720,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           var match = _ref2.match;
           // Users can only see their own account info!
           if (match.params.username === storedUser) return _react.default.createElement(_changeProfileView.default, {
-            user: users.find(function (m) {
-              return m.Username === match.params.username;
-            })
+            user: userInfo
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -52691,9 +52729,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           var match = _ref3.match;
           // Users can only see their own account info!
           if (match.params.username === storedUser) return _react.default.createElement(_deleteProfileView.default, {
-            user: users.find(function (m) {
-              return m.Username === match.params.username;
-            }),
+            user: userInfo,
             onDelete: function onDelete(user) {
               return _this4.logoutUser();
             }
@@ -52705,9 +52741,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           var match = _ref4.match;
           // Users can only see their own account info!
           if (match.params.username === storedUser) return _react.default.createElement(_changeFavoritesView.ChangeFavorites, {
-            user: users.find(function (m) {
-              return m.Username === match.params.username;
-            })
+            user: userInfo
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -52721,9 +52755,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             movie: movies.find(function (m) {
               return m._id === match.params.movieId;
             }),
-            user: users.find(function (m) {
-              return m.Username === storedUser;
-            }),
+            user: userInfo,
             token: localStorage.getItem('token')
           });
         }
@@ -52762,12 +52794,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    movies: state.movies
+    movies: state.movies,
+    userInfo: state.userInfo
   };
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
-  setMovies: _actions.setMovies
+  setMovies: _actions.setMovies,
+  setUserInfo: _actions.setUserInfo
 })(MainView);
 
 exports.default = _default;
@@ -52809,9 +52843,23 @@ function movies() {
   }
 }
 
+function userInfo() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions.SET_USER_INFO:
+      return action.value;
+
+    default:
+      return state;
+  }
+}
+
 var moviesApp = (0, _redux.combineReducers)({
   visibilityFilter: visibilityFilter,
-  movies: movies
+  movies: movies,
+  userInfo: userInfo
 });
 var _default = moviesApp;
 exports.default = _default;
@@ -52918,7 +52966,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62384" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62993" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
