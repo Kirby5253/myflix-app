@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
  * @function ChangeFavorites
  * @requires react
  * @requires react-bootstrap/Form
- * @requires './change-favorites.scss'
+ * @requires './change-favorites-view.scss'
  * @requires axios
  * @requires react-router-dom
  * @requires react-redux
@@ -21,7 +21,11 @@ function ChangeFavorites() {
   const storedUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
 
-  const handleRemoveFavorite = (e) => {
+  /**
+	 * function that handles the put request to edit the user's favorite array
+	 * @function handleRemoveFavorite
+	 */
+  const handleRemoveFavorite = () => {
     axios
       .put(
         `https://myflixdb5253.herokuapp.com/users/${storedUser}/Movies/${favoriteId}`,
