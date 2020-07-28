@@ -6,56 +6,64 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-class DeleteProfile extends React.Component {
-	render() {
-		const { user, onDelete } = this.props;
-		const token = localStorage.getItem('token');
+/**
+ * allows users to type in the details that they want to change of their account
+ * @function ChangeProfile
+ * @requires react
+ * @requires react-bootstrap/Form
+ * @requires react-bootstrap/Button
+ * @requires './change-profile-view.scss'
+ * @requires axios
+ * @requires react-router-dom
+ * @requires react-redux
+ */
+function DeleteProfile(props) {
+  const { user, onDelete } = this.props;
+  const token = localStorage.getItem('token');
 
-		const handleDelete = (e) => {
-			axios
-				.delete(`https://myflixdb5253.herokuapp.com/users/${user.Username}`, {
-					headers: { Authorization: `Bearer ${token}` }
-				})
-				.then((response) => {
-					const data = response.data;
-					location.reload();
-					console.log(data);
-					onDelete();
-				})
-				.catch((e) => {
-					console.log('no such user');
-				});
-		};
+  const handleDelete = (e) => {
+    axios
+      .delete(`https://myflixdb5253.herokuapp.com/users/${user.Username}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        const data = response.data;
+        location.reload();
+        console.log(data);
+        onDelete();
+      })
+      .catch((e) => {
+        console.log('no such user');
+      });
+  };
 
-		return (
-			<div className="delete-profile">
-				<h1>Are you sure you want to delete this profile?</h1>
-				<ul>
-					<li>
-						<Link to={`/register`}>
-							<Button onClick={handleDelete} className="delete-buttons" variant="danger">
-								Yes, delete my account.
-							</Button>
-						</Link>
-					</li>
-					<li>
-						<Link to={`/profile/${user.Username}`}>
-							<Button className="delete-buttons">No, do not delete my account.</Button>
-						</Link>
-					</li>
-				</ul>
-			</div>
-		);
-	}
+  return (
+    <div className="delete-profile">
+      <h1>Are you sure you want to delete this profile?</h1>
+      <ul>
+        <li>
+          <Link to={`/register`}>
+            <Button onClick={handleDelete} className="delete-buttons" variant="danger">
+              Yes, delete my account.
+            </Button>
+          </Link>
+        </li>
+        <li>
+          <Link to={`/profile/${user.Username}`}>
+            <Button className="delete-buttons">No, do not delete my account.</Button>
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
 }
 
 DeleteProfile.propTypes = {
-	user: PropTypes.object
+  user: PropTypes.object,
 };
 
-
 let mapStateToProps = (state) => {
-	return { user: state.userInfo };
+  return { user: state.userInfo };
 };
 
 export default connect(mapStateToProps, {})(DeleteProfile);
