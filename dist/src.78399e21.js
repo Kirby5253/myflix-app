@@ -32693,7 +32693,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"./../utils":"../node_modules/axios/lib/utils.js","./../core/settle":"../node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"../node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../node_modules/axios/lib/core/createError.js","./../helpers/cookies":"../node_modules/axios/lib/helpers/cookies.js"}],"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
+},{"./../utils":"../node_modules/axios/lib/utils.js","./../core/settle":"../node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"../node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../node_modules/axios/lib/core/createError.js","./../helpers/cookies":"../node_modules/axios/lib/helpers/cookies.js"}],"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -33002,7 +33002,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"../node_modules/axios/lib/adapters/xhr.js","./adapters/http":"../node_modules/axios/lib/adapters/xhr.js","process":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
+},{"./utils":"../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"../node_modules/axios/lib/adapters/xhr.js","./adapters/http":"../node_modules/axios/lib/adapters/xhr.js","process":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/node_modules/process/browser.js"}],"../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
 'use strict';
 
 var utils = require('./../utils');
@@ -33420,7 +33420,7 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -33452,7 +33452,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -33487,12 +33487,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/main-view/main-view.scss":[function(require,module,exports) {
+},{"./bundle-url":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/bundle-url.js"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -34488,9 +34488,9 @@ try {
     window.addEventListener('test', options, options);
     window.removeEventListener('test', options, true);
   }
-} catch (e) {}
-/* */
-
+} catch (e) {
+  /* */
+}
 /**
  * An `addEventListener` ponyfill, supports the `once` option
  */
@@ -51159,7 +51159,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51465,7 +51465,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51767,7 +51767,7 @@ function RegistrationView(props) {
   }, "Email is required..."), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
-    type: "text",
+    type: "date",
     placeholder: "YYYY-MM-DD",
     value: newBirthDate,
     onChange: function onChange(e) {
@@ -51802,7 +51802,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51902,7 +51902,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51924,78 +51924,44 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var DirectorView = /*#__PURE__*/function (_React$Component) {
-  _inherits(DirectorView, _React$Component);
-
-  var _super = _createSuper(DirectorView);
-
-  function DirectorView() {
-    var _this;
-
-    _classCallCheck(this, DirectorView);
-
-    _this = _super.call(this);
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(DirectorView, [{
-    key: "render",
-    value: function render() {
-      var director = this.props.director;
-      return _react.default.createElement("div", {
-        className: "director-view"
-      }, _react.default.createElement("div", {
-        className: "director-name"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Director Name: "), _react.default.createElement("span", {
-        className: "value"
-      }, director.Name)), _react.default.createElement("br", null), _react.default.createElement("div", {
-        className: "director-bio"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Biography: "), _react.default.createElement("span", {
-        className: "value"
-      }, director.Bio)), _react.default.createElement("br", null), _react.default.createElement("div", {
-        className: "director-birth"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Born: "), _react.default.createElement("span", {
-        className: "value"
-      }, director.Birth)), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/",
-        className: "home-button"
-      }, _react.default.createElement(_Button.default, {
-        variant: "link"
-      }, "Home")));
-    }
-  }]);
-
-  return DirectorView;
-}(_react.default.Component);
+/**
+ * allows users to type in the details that they want to change of their account
+ * @function DirectorView
+ * @requires react
+ * @requires react-bootstrap/Button
+ * @requires './director-view.scss'
+ * @requires react-router-dom
+ * @requires react-redux
+ */
+function DirectorView() {
+  var director = this.props.director;
+  return _react.default.createElement("div", {
+    className: "director-view"
+  }, _react.default.createElement("div", {
+    className: "director-name"
+  }, _react.default.createElement("span", {
+    className: "label"
+  }, "Director Name: "), _react.default.createElement("span", {
+    className: "value"
+  }, director.Name)), _react.default.createElement("br", null), _react.default.createElement("div", {
+    className: "director-bio"
+  }, _react.default.createElement("span", {
+    className: "label"
+  }, "Biography: "), _react.default.createElement("span", {
+    className: "value"
+  }, director.Bio)), _react.default.createElement("br", null), _react.default.createElement("div", {
+    className: "director-birth"
+  }, _react.default.createElement("span", {
+    className: "label"
+  }, "Born: "), _react.default.createElement("span", {
+    className: "value"
+  }, director.Birth)), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/",
+    className: "home-button"
+  }, _react.default.createElement(_Button.default, {
+    variant: "link"
+  }, "Home")));
+}
 
 DirectorView.propTypes = {
   director: _propTypes.default.shape({
@@ -52013,7 +51979,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52140,7 +52106,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/change-profile-view/change-profile-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/change-profile-view/change-profile-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52153,8 +52119,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
-
-var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -52182,6 +52146,17 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+/**
+ * allows users to type in the details that they want to change of their account
+ * @function ChangeProfile
+ * @requires react
+ * @requires react-bootstrap/Form
+ * @requires react-bootstrap/Button
+ * @requires './change-profile-view.scss'
+ * @requires axios
+ * @requires react-router-dom
+ * @requires react-redux
+ */
 function ChangeProfile(props) {
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -52206,6 +52181,14 @@ function ChangeProfile(props) {
   var storedUser = localStorage.getItem('user');
   var token = localStorage.getItem('token');
   if (!storedUser) return null;
+  /**
+  * handles the put request to api to change user details
+  * @function handleProfileUpdate
+  * @params {string} new username
+  * @params {string} new password
+  * @params {string} new email
+  * @params {string} new birthday
+  */
 
   var handleProfileUpdate = function handleProfileUpdate(e) {
     e.preventDefault();
@@ -52277,7 +52260,7 @@ function ChangeProfile(props) {
   }, "Please include a valid email."), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicPassword"
   }, _react.default.createElement(_Form.default.Label, null, "Date of Birth"), _react.default.createElement(_Form.default.Control, {
-    type: "text",
+    type: "date",
     placeholder: "YYYY-MM-DD",
     value: newBirthDate,
     onChange: function onChange(e) {
@@ -52305,12 +52288,12 @@ function ChangeProfile(props) {
 var _default = (0, _reactRedux.connect)(null, {})(ChangeProfile);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./change-profile-view.scss":"components/change-profile-view/change-profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/delete-profile-view/delete-profile-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","./change-profile-view.scss":"components/change-profile-view/change-profile-view.scss","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/delete-profile-view/delete-profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/delete-profile-view/delete-profile-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/delete-profile-view/delete-profile-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52334,80 +52317,56 @@ var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/**
+ * allows users to type in the details that they want to change of their account
+ * @function DeleteProfile
+ * @requires react
+ * @requires prop-types
+ * @requires react-bootstrap/Button
+ * @requires './delete-profile-view.scss'
+ * @requires axios
+ * @requires react-router-dom
+ * @requires react-redux
+ */
+function DeleteProfile(props) {
+  var _this$props = this.props,
+      user = _this$props.user,
+      onDelete = _this$props.onDelete;
+  var token = localStorage.getItem('token');
+  /**
+  * handles the delete request to api
+  * @params {string} username
+  */
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  var handleDelete = function handleDelete(e) {
+    _axios.default.delete("https://myflixdb5253.herokuapp.com/users/".concat(user.Username), {
+      headers: {
+        Authorization: "Bearer ".concat(token)
+      }
+    }).then(function (response) {
+      var data = response.data;
+      location.reload();
+      console.log(data);
+      onDelete();
+    }).catch(function (e) {
+      console.log('no such user');
+    });
+  };
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var DeleteProfile = /*#__PURE__*/function (_React$Component) {
-  _inherits(DeleteProfile, _React$Component);
-
-  var _super = _createSuper(DeleteProfile);
-
-  function DeleteProfile() {
-    _classCallCheck(this, DeleteProfile);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(DeleteProfile, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          user = _this$props.user,
-          onDelete = _this$props.onDelete;
-      var token = localStorage.getItem('token');
-
-      var handleDelete = function handleDelete(e) {
-        _axios.default.delete("https://myflixdb5253.herokuapp.com/users/".concat(user.Username), {
-          headers: {
-            Authorization: "Bearer ".concat(token)
-          }
-        }).then(function (response) {
-          var data = response.data;
-          location.reload();
-          console.log(data);
-          onDelete();
-        }).catch(function (e) {
-          console.log('no such user');
-        });
-      };
-
-      return _react.default.createElement("div", {
-        className: "delete-profile"
-      }, _react.default.createElement("h1", null, "Are you sure you want to delete this profile?"), _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/register"
-      }, _react.default.createElement(_Button.default, {
-        onClick: handleDelete,
-        className: "delete-buttons",
-        variant: "danger"
-      }, "Yes, delete my account."))), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/profile/".concat(user.Username)
-      }, _react.default.createElement(_Button.default, {
-        className: "delete-buttons"
-      }, "No, do not delete my account.")))));
-    }
-  }]);
-
-  return DeleteProfile;
-}(_react.default.Component);
+  return _react.default.createElement("div", {
+    className: "delete-profile"
+  }, _react.default.createElement("h1", null, "Are you sure you want to delete this profile?"), _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
+    to: "/register"
+  }, _react.default.createElement(_Button.default, {
+    onClick: handleDelete,
+    className: "delete-buttons",
+    variant: "danger"
+  }, "Yes, delete my account."))), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
+    to: "/profile/".concat(user.Username)
+  }, _react.default.createElement(_Button.default, {
+    className: "delete-buttons"
+  }, "No, do not delete my account.")))));
+}
 
 DeleteProfile.propTypes = {
   user: _propTypes.default.object
@@ -52422,12 +52381,12 @@ var mapStateToProps = function mapStateToProps(state) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, {})(DeleteProfile);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./delete-profile-view.scss":"components/delete-profile-view/delete-profile-view.scss","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-favorites-view/change-favorites.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./delete-profile-view.scss":"components/delete-profile-view/delete-profile-view.scss","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/change-favorites-view/change-favorites-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/change-favorites-view/change-favorites-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"components/change-favorites-view/change-favorites-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52439,11 +52398,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
-require("./change-favorites.scss");
+require("./change-favorites-view.scss");
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -52469,6 +52426,16 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+/**
+ * allows users to type in the id of their favorite movie to remove it from their account list
+ * @function ChangeFavorites
+ * @requires react
+ * @requires react-bootstrap/Form
+ * @requires './change-favorites-view.scss'
+ * @requires axios
+ * @requires react-router-dom
+ * @requires react-redux
+ */
 function ChangeFavorites() {
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -52477,8 +52444,12 @@ function ChangeFavorites() {
 
   var storedUser = localStorage.getItem('user');
   var token = localStorage.getItem('token');
+  /**
+  * function that handles the put request to edit the user's favorite array
+  * @function handleRemoveFavorite
+  */
 
-  var handleRemoveFavorite = function handleRemoveFavorite(e) {
+  var handleRemoveFavorite = function handleRemoveFavorite() {
     _axios.default.put("https://myflixdb5253.herokuapp.com/users/".concat(storedUser, "/Movies/").concat(favoriteId), {
       headers: {
         Authorization: "Bearer ".concat(token)
@@ -52532,7 +52503,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, {})(ChangeFavorites);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./change-favorites.scss":"components/change-favorites-view/change-favorites.scss","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./change-favorites-view.scss":"components/change-favorites-view/change-favorites-view.scss","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -52926,7 +52897,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.jsx":[function(require,module,exports) {
+},{"_css_loader":"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/css-loader.js"}],"index.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -52996,7 +52967,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 var container = document.getElementsByClassName('app-container')[0]; // Tell React to render our app in the root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -53024,7 +52995,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62993" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56081" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -53200,5 +53171,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../home/jake/.nvm/versions/node/v12.18.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["C:/Users/Jake/AppData/Roaming/npm/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map
