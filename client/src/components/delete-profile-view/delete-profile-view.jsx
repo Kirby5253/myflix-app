@@ -8,11 +8,11 @@ import { Link } from 'react-router-dom';
 
 /**
  * allows users to type in the details that they want to change of their account
- * @function ChangeProfile
+ * @function DeleteProfile
  * @requires react
- * @requires react-bootstrap/Form
+ * @requires prop-types
  * @requires react-bootstrap/Button
- * @requires './change-profile-view.scss'
+ * @requires './delete-profile-view.scss'
  * @requires axios
  * @requires react-router-dom
  * @requires react-redux
@@ -21,6 +21,10 @@ function DeleteProfile(props) {
   const { user, onDelete } = this.props;
   const token = localStorage.getItem('token');
 
+  /**
+	 * handles the delete request to api
+	 * @params {string} username
+	 */
   const handleDelete = (e) => {
     axios
       .delete(`https://myflixdb5253.herokuapp.com/users/${user.Username}`, {
