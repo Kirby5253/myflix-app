@@ -6,66 +6,64 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class ProfileView extends React.Component {
-	constructor() {
-		super();
+  constructor() {
+    super();
 
-		this.state = {};
-	}
+    this.state = {};
+  }
 
-	render() {
-		const { user, favList } = this.props;
-		const storedUser = localStorage.getItem('user');
+  render() {
+    const { user, favList } = this.props;
+    const storedUser = localStorage.getItem('user');
 
-		let favorites = user.Favorite_Movies;
+    let favorites = user.Favorite_Movies;
 
-		if(!storedUser) return null;
+    if (!storedUser) return null;
 
-		return (
-			<Container>
-				<div className="profile-view">
-					<div className="username">
-						<span className="profile-label">Username: </span>
-						<span className="value">{user.Username}</span>
-					</div>
-					<div className="user-email">
-						<span className="profile-label">Email: </span>
-						<span className="value">{user.Email}</span>
-					</div>
-					<div className="user-favorites">
-						<span className="profile-label">Favorites: </span>
-						<span className="value">{favorites? favorites.join(',  '): <div>No favorites to show.</div>}</span>
-					</div>
-					<div className="button-nav">
-						<ul>
-							<li>
-								<Link to={`/profile/${user.Username}/favorites`}>
-									<Button variant="dark">Remove Favorites</Button>
-								</Link>
-							</li>
-							<li>
-								<Link to={`/profile/${user.Username}/update`}>
-									<Button variant="dark">Update Account</Button>
-								</Link>
-							</li>
-							<li>
-								<Link to={`/profile/${user.Username}/delete`}>
-									<Button variant="dark">Delete Account</Button>
-								</Link>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</Container>
-		);
-	}
+    return (
+      <Container>
+        <div className="profile-view">
+          <div className="username">
+            <span className="profile-label">Username: </span>
+            <span className="value">{user.Username}</span>
+          </div>
+          <div className="user-email">
+            <span className="profile-label">Email: </span>
+            <span className="value">{user.Email}</span>
+          </div>
+          <div className="user-favorites">
+            <span className="profile-label">Favorites: </span>
+            <span className="value">
+              {favorites ? favorites.join(',  ') : <div>No favorites to show.</div>}
+            </span>
+          </div>
+          <div className="button-nav">
+            <ul>
+              <li>
+                <Link to={`/profile/${user.Username}/favorites`}>
+                  <Button variant="dark">Remove Favorites</Button>
+                </Link>
+              </li>
+              <li>
+                <Link to={`/profile/${user.Username}/update`}>
+                  <Button variant="dark">Update Account</Button>
+                </Link>
+              </li>
+              <li>
+                <Link to={`/profile/${user.Username}/delete`}>
+                  <Button variant="dark">Delete Account</Button>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </Container>
+    );
+  }
 }
 
-ProfileView.propTypes = {
-	user: PropTypes.string
-};
-
 let mapStateToProps = (state) => {
-	return { user: state.userInfo };
+  return { user: state.userInfo };
 };
 
 export default connect(mapStateToProps, {})(ProfileView);

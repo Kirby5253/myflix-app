@@ -52173,46 +52173,19 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _super.call(this);
-
-    _this.renderFavorites = function () {
-      var _this$props = _this.props,
-          user = _this$props.user,
-          movies = _this$props.movies;
-    };
-
-    _this.state = {
-      favorites: []
-    };
+    _this.state = {};
     return _this;
   }
 
   _createClass(ProfileView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.renderFavorites();
-      console.log(this.props.user.Favorite_Movies);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
-      var _this$props2 = this.props,
-          user = _this$props2.user,
-          movies = _this$props2.movies;
+      var _this$props = this.props,
+          user = _this$props.user,
+          favList = _this$props.favList;
       var storedUser = localStorage.getItem('user');
+      var favorites = user.Favorite_Movies;
       if (!storedUser) return null;
-      var i;
-      var filteredMovies = movies.filter(function (m) {
-        var _this2$props = _this2.props,
-            user = _this2$props.user,
-            movies = _this2$props.movies;
-
-        for (i = 0; i < user.Favorite_Movies.length; i++) {
-          m._id === user.Favorite_Movies[i];
-        }
-      });
-      console.log(filteredMovies);
       return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("div", {
         className: "profile-view"
       }, _react.default.createElement("div", {
@@ -52233,7 +52206,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "profile-label"
       }, "Favorites: "), _react.default.createElement("span", {
         className: "value"
-      })), _react.default.createElement("div", {
+      }, favorites ? favorites.join(',  ') : _react.default.createElement("div", null, "No favorites to show."))), _react.default.createElement("div", {
         className: "button-nav"
       }, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/profile/".concat(user.Username, "/favorites")
@@ -52918,10 +52891,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           // Users can only see their own account info!
           if (match.params.username === storedUser) return _react.default.createElement(_profileView.default, {
             user: userInfo,
-            movies: movies,
-            favListName: _this4.props.movies.filter(function (m) {
-              return m._id === user.Favorite_Movies;
-            })
+            movies: movies
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
