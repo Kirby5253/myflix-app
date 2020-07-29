@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view/main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view/main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import axios from 'axios';
+import { Nav, Navbar, Container } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+// defined actions
+import { setMovies, setUserInfo } from '../../actions/actions';
+// components
+import MoviesList from '../movies-list/movies-list';
+import LoginView from '../login-view/login-view';
+import MovieView from '../movie-view/movie-view';
+import RegistrationView from '../registration-view/registration-view';
+import GenreView from '../genre-view/genre-view';
+import DirectorView from '../director-view/director-view';
+import ProfileView from '../profile-view/profile-view';
+import ChangeProfile from '../change-profile-view/change-profile-view';
+import DeleteProfile from '../delete-profile-view/delete-profile-view';
+import ChangeFavorites from '../change-favorites-view/change-favorites-view';
+// style
+import './main-view.scss';
+
+/**
+ * @class MainView
+ * @requires react
+ * @requires react-bootstrap
+ * @requires axios
+ * @requires './main-view.scss'
+ * @requires prop-types
+ * @requires react-redux
+ * @requires react-router-dom
+ * @requires '../../actions/actions'
+ * @requires MoviesList
+ * @requires LoginView
+ * @requires MovieView
+ * @requires RegistrationView
+ * @requires GenreView
+ * @requires DirectorView
+ * @requires ProfileView
+ * @requires ChangeProfile
+ * @requires DeleteProfile
+ * @requires ChangeFavorites
+ */
+class MainView extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      user: null,
+    };
+  }
+
+  // Takes the token and allows users to stay logged in
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    let storedUser = localStorage.getItem('user');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user'),
+      });
+      this.getMovies(accessToken);
+      this.getUserInfo(storedUser, accessToken);
+    }
+  }
+
+  /**
+   * saves the authorization data once a user has logged into the app, then loads the movies from db
+   * @function onLoggedIn
+   * @param {object} authData
+   */
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username,
+    });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+    this.getUserInfo(authData.user.Username, authData.token);
+  }
+
+  /**
+   * gets the movies from the api, called when user logs in
+   * @function getMovies
+   * @param {string} token token from local storage
+   */
+  getMovies(token) {
+    axios
+      .get('https://myflixdb5253.herokuapp.com/movies', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.props.setMovies(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  /**
+   * gets the user's information from the api, called when user logs in
+   * @function getUserInfo
+   * @param {string} user name of the user
+   * @param {string} token token from local storage
+   */
+  getUserInfo(user, token) {
+    axios
+      .get(`https://myflixdb5253.herokuapp.com/users/${user}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.props.setUserInfo(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  /**
+   * this handles the logout and clearing of local storage when called
+   * @function logoutUser
+   * @param {string} user username
+   */
+  logoutUser(user) {
+    this.props.setUserInfo(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
+  render() {
+    let { movies, userInfo } = this.props;
+    // If the state isn't initialized, this will throw on runtime
+    // before the data is initially loaded
+    const { user } = this.state;
+    const storedUser = localStorage.getItem('user');
+
+    return (
+      &lt;div>
+        {//Allows the nav bar to not render links until user logs in
+        userInfo ? (
+          &lt;div className="navbar">
+            &lt;Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+              &lt;Navbar.Brand href="/client/">
+                &lt;h1>MyFlix&lt;/h1>
+              &lt;/Navbar.Brand>
+              &lt;Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              &lt;Navbar.Collapse id="responsive-navbar-nav">
+                &lt;Nav className="mr-auto">
+                  &lt;Nav.Link href="/client/">Movies&lt;/Nav.Link>
+                  &lt;Nav.Link href={`/client/profile/${user}`}>Account&lt;/Nav.Link>
+                  &lt;Nav.Link onClick={(user) => this.logoutUser()} href="/client">
+                    Logout
+                  &lt;/Nav.Link>
+                &lt;/Nav>
+              &lt;/Navbar.Collapse>
+            &lt;/Navbar>
+          &lt;/div>
+        ) : (
+          &lt;div className="navbar">
+            &lt;Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
+              &lt;Navbar.Brand href="/">
+                &lt;h1>MyFlix&lt;/h1>
+              &lt;/Navbar.Brand>
+            &lt;/Navbar>
+          &lt;/div>
+        )}
+
+        {/* Login or main page depending on if the user is logged in */}
+        &lt;Router basename="/client">
+          &lt;div className="main-view">
+            &lt;Route
+              exact
+              path="/"
+              render={() => {
+                if (!userInfo)
+                  return (
+                    &lt;Container>
+                      &lt;LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+                    &lt;/Container>
+                  );
+                return &lt;MoviesList movies={movies} />;
+              }}
+            />
+
+            {/* Create new user  */}
+            &lt;Route
+              path="/register"
+              render={() => {
+                if (!user)
+                  return (
+                    &lt;Container>
+                      &lt;RegistrationView />
+                    &lt;/Container>
+                  );
+              }}
+            />
+
+            {/* See user profile */}
+            &lt;Route
+              path="/profile/:username"
+              render={({ match }) => {
+                // Users can only see their own account info!
+                if (match.params.username === storedUser)
+                  return &lt;ProfileView user={userInfo} movies={movies} />;
+              }}
+            />
+
+            {/* Allow users to update their profile info */}
+            &lt;Route
+              path="/profile/:username/update"
+              render={({ match }) => {
+                // Users can only see their own account info!
+                if (match.params.username === storedUser) return &lt;ChangeProfile user={userInfo} />;
+              }}
+            />
+
+            {/* Allow users to delete their profile */}
+            &lt;Route
+              path="/profile/:username/delete"
+              render={({ match }) => {
+                // Users can only see their own account info!
+                if (match.params.username === storedUser)
+                  return &lt;DeleteProfile user={userInfo} onDelete={(user) => this.logoutUser()} />;
+              }}
+            />
+
+            {/* Allow users to remove favorites form their list */}
+            &lt;Route
+              path="/profile/:username/favorites"
+              render={({ match }) => {
+                // Users can only see their own account info!
+                if (match.params.username === storedUser)
+                  return &lt;ChangeFavorites user={userInfo} />;
+              }}
+            />
+
+            {/* Allow users to see details about a movie, and add it to their favorites */}
+            &lt;Route
+              path="/movies/:movieId"
+              render={({ match }) => (
+                &lt;MovieView
+                  addToFav={() => this.addToFav(user)}
+                  movie={movies.find((m) => m._id === match.params.movieId)}
+                  user={userInfo}
+                  token={localStorage.getItem('token')}
+                />
+              )}
+            />
+
+            {/* Allow users to see more details about a movie's genre */}
+            &lt;Route
+              path="/genres/:name"
+              render={({ match }) => {
+                if (!movies) return &lt;div className="main-view" />;
+                return &lt;GenreView name={match.params.name} />;
+              }}
+            />
+
+            {/* Allow users to see more details about a movie's director */}
+            &lt;Route
+              path="/directors/:name"
+              render={({ match }) => {
+                if (!movies) return &lt;div className="main-view" />;
+                return &lt;DirectorView name={match.params.name} />;
+              }}
+            />
+          &lt;/div>
+        &lt;/Router>
+      &lt;/div>
+    );
+  }
+}
+
+MainView.propTypes = {
+  movies: PropTypes.array.isRequired,
+};
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies, userInfo: state.userInfo };
+};
+
+export default connect(mapStateToProps, { setMovies, setUserInfo })(MainView);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DirectorView.html">DirectorView</a></li><li><a href="GenreView.html">GenreView</a></li><li><a href="MainView.html">MainView</a></li><li><a href="MovieCard.html">MovieCard</a></li><li><a href="global.html#MoviesList">MoviesList</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ChangeFavorites">ChangeFavorites</a></li><li><a href="global.html#ChangeProfile">ChangeProfile</a></li><li><a href="global.html#DeleteProfile">DeleteProfile</a></li><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#handleProfileUpdate">handleProfileUpdate</a></li><li><a href="global.html#handleRemoveFavorite">handleRemoveFavorite</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#handleSubmitEnter">handleSubmitEnter</a></li><li><a href="global.html#LoginView">LoginView</a></li><li><a href="global.html#logoutUser">logoutUser</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#RegistrationView">RegistrationView</a></li><li><a href="global.html#VisibilityFilterInput">VisibilityFilterInput</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Tue Jul 28 2020 21:05:14 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

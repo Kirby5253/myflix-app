@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: director-view/director-view.jsx</title>
+    <title>JSDoc: Source: genre-view/genre-view.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: director-view/director-view.jsx</h1>
+    <h1 class="page-title">Source: genre-view/genre-view.jsx</h1>
 
     
 
@@ -29,15 +29,15 @@
             <pre class="prettyprint source linenums"><code>import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-import './director-view.scss';
+import './genre-view.scss';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 /**
- * allows users to view the details of a director that they want to view.
- * only accessible through movie view currently
- * @class DirectorView
+ * allows users to see the details that they want to view about movie genres.
+ * only accessible from movie view currently
+ * @class GenreView
  * @requires react
  * @requires axios
  * @requires react-bootstrap/Button
@@ -45,26 +45,26 @@ import axios from 'axios';
  * @requires react-router-dom
  * @requires react-redux
  */
-class DirectorView extends React.Component {
+class GenreView extends React.Component {
   constructor() {
     super();
 
-    this.state = { directorInfo: '' };
+    this.state = { genreInfo: '' };
   }
 
   /**
-	 * handles getting the info for the related director
-	 * @param {string} name director name
-	 * @returns {object} Director name, biography, and birth year
+	 * handles getting the info for the related genre
+	 * @param {string} name genre name
+	 * @returns {object} Genre name and description
 	 */
-  getDirectorInfo(name) {
+  getGenreInfo(name) {
     const token = localStorage.getItem('token');
     axios
-      .get(`https://myflixdb5253.herokuapp.com/directors/${name}`, {
+      .get(`https://myflixdb5253.herokuapp.com/genres/${name}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        this.setState({ directorInfo: response.data });
+        this.setState({ genreInfo: response.data });
       })
       .catch(function(error) {
         console.log(error);
@@ -72,43 +72,41 @@ class DirectorView extends React.Component {
   }
 
   componentDidMount() {
-    this.getDirectorInfo(this.props.name);
+    this.getGenreInfo(this.props.name);
   }
-
   render() {
-    const { directorInfo } = this.state;
+    const { genreInfo } = this.state;
 
     return (
-      &lt;div className="director-view">
-        &lt;div className="director-name">
-          &lt;span className="label">Director Name: &lt;/span>
-          &lt;span className="value">{directorInfo.Name}&lt;/span>
+      &lt;div className="genre-view">
+        &lt;div className="genre-name">
+          &lt;span className="label">Genre Name: &lt;/span>
+          &lt;span className="value">{genreInfo.Name}&lt;/span>
+        &lt;/div>{' '}
+        &lt;br />
+        &lt;div className="movie-description">
+          &lt;span className="label">Description: &lt;/span>
+          &lt;span className="value">{genreInfo.Description}&lt;/span>
         &lt;/div>
         &lt;br />
-        &lt;div className="director-bio">
-          &lt;span className="label">Biography: &lt;/span>
-          &lt;span className="value">{directorInfo.Bio}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-birth">
-          &lt;span className="label">Born: &lt;/span>
-          &lt;span className="value">{directorInfo.Birth}&lt;/span>
-        &lt;/div>
-
-        &lt;br />
-        &lt;Link to={`/`} className="home-button">
-          &lt;Button variant="link">Home&lt;/Button>
+        &lt;Link to={`/`}>
+          &lt;Button className="genre-button" variant="link">
+            Home
+          &lt;/Button>
         &lt;/Link>
       &lt;/div>
     );
   }
 }
 
-DirectorView.propTypes = {
-  name: PropTypes.string.isRequired,
+GenreView.propTypes = {
+  genre: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+  }),
 };
 
-export default connect(null, {})(DirectorView);
+export default connect(null, {})(GenreView);
 </code></pre>
         </article>
     </section>

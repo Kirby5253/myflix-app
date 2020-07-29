@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: director-view/director-view.jsx</title>
+    <title>JSDoc: Source: profile-view/profile-view.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: director-view/director-view.jsx</h1>
+    <h1 class="page-title">Source: profile-view/profile-view.jsx</h1>
 
     
 
@@ -27,88 +27,82 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react';
-import Button from 'react-bootstrap/Button';
-import PropTypes from 'prop-types';
-import './director-view.scss';
+import { Button, Container } from 'react-bootstrap';
+import './profile-view.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 /**
- * allows users to view the details of a director that they want to view.
- * only accessible through movie view currently
- * @class DirectorView
+ * displays the users profile name, info, and options to update/change/delete profile
+ * @class MoviesList
  * @requires react
- * @requires axios
- * @requires react-bootstrap/Button
- * @requires './director-view.scss'
- * @requires react-router-dom
  * @requires react-redux
+ * @requires react-bootstrap
+ * @requires react-router-dom
+ * @requires './profile-view.scss'
  */
-class DirectorView extends React.Component {
+class ProfileView extends React.Component {
   constructor() {
     super();
 
-    this.state = { directorInfo: '' };
-  }
-
-  /**
-	 * handles getting the info for the related director
-	 * @param {string} name director name
-	 * @returns {object} Director name, biography, and birth year
-	 */
-  getDirectorInfo(name) {
-    const token = localStorage.getItem('token');
-    axios
-      .get(`https://myflixdb5253.herokuapp.com/directors/${name}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({ directorInfo: response.data });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
-
-  componentDidMount() {
-    this.getDirectorInfo(this.props.name);
+    this.state = {};
   }
 
   render() {
-    const { directorInfo } = this.state;
+    const { user, favList } = this.props;
+    const storedUser = localStorage.getItem('user');
+
+    let favorites = user.Favorite_Movies;
+
+    if (!storedUser) return null;
 
     return (
-      &lt;div className="director-view">
-        &lt;div className="director-name">
-          &lt;span className="label">Director Name: &lt;/span>
-          &lt;span className="value">{directorInfo.Name}&lt;/span>
+      &lt;Container>
+        &lt;div className="profile-view">
+          &lt;div className="username">
+            &lt;span className="profile-label">Username: &lt;/span>
+            &lt;span className="value">{user.Username}&lt;/span>
+          &lt;/div>
+          &lt;div className="user-email">
+            &lt;span className="profile-label">Email: &lt;/span>
+            &lt;span className="value">{user.Email}&lt;/span>
+          &lt;/div>
+          &lt;div className="user-favorites">
+            &lt;span className="profile-label">Favorites: &lt;/span>
+            &lt;span className="value">
+              {favorites ? favorites.join(',  ') : &lt;div>No favorites to show.&lt;/div>}
+            &lt;/span>
+          &lt;/div>
+          &lt;div className="button-nav">
+            &lt;ul>
+              &lt;li>
+                &lt;Link to={`/profile/${user.Username}/favorites`}>
+                  &lt;Button variant="dark">Remove Favorites&lt;/Button>
+                &lt;/Link>
+              &lt;/li>
+              &lt;li>
+                &lt;Link to={`/profile/${user.Username}/update`}>
+                  &lt;Button variant="dark">Update Account&lt;/Button>
+                &lt;/Link>
+              &lt;/li>
+              &lt;li>
+                &lt;Link to={`/profile/${user.Username}/delete`}>
+                  &lt;Button variant="dark">Delete Account&lt;/Button>
+                &lt;/Link>
+              &lt;/li>
+            &lt;/ul>
+          &lt;/div>
         &lt;/div>
-        &lt;br />
-        &lt;div className="director-bio">
-          &lt;span className="label">Biography: &lt;/span>
-          &lt;span className="value">{directorInfo.Bio}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-birth">
-          &lt;span className="label">Born: &lt;/span>
-          &lt;span className="value">{directorInfo.Birth}&lt;/span>
-        &lt;/div>
-
-        &lt;br />
-        &lt;Link to={`/`} className="home-button">
-          &lt;Button variant="link">Home&lt;/Button>
-        &lt;/Link>
-      &lt;/div>
+      &lt;/Container>
     );
   }
 }
 
-DirectorView.propTypes = {
-  name: PropTypes.string.isRequired,
+let mapStateToProps = (state) => {
+  return { user: state.userInfo };
 };
 
-export default connect(null, {})(DirectorView);
+export default connect(mapStateToProps, {})(ProfileView);
 </code></pre>
         </article>
     </section>

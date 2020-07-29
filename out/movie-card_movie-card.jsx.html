@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: director-view/director-view.jsx</title>
+    <title>JSDoc: Source: movie-card/movie-card.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: director-view/director-view.jsx</h1>
+    <h1 class="page-title">Source: movie-card/movie-card.jsx</h1>
 
     
 
@@ -27,88 +27,63 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react';
-import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-import './director-view.scss';
-import { connect } from 'react-redux';
+import { Button, Card } from 'react-bootstrap';
+import './movie-card.scss';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+
+import { connect } from 'react-redux';
 
 /**
- * allows users to view the details of a director that they want to view.
- * only accessible through movie view currently
- * @class DirectorView
+ * displays the movie information in card form
+ * @class MovieCard
  * @requires react
- * @requires axios
- * @requires react-bootstrap/Button
- * @requires './director-view.scss'
+ * @requires prop-types
+ * @requires react-bootstrap
+ * @requires './movie-card.scss'
  * @requires react-router-dom
  * @requires react-redux
  */
-class DirectorView extends React.Component {
-  constructor() {
-    super();
-
-    this.state = { directorInfo: '' };
-  }
-
-  /**
-	 * handles getting the info for the related director
-	 * @param {string} name director name
-	 * @returns {object} Director name, biography, and birth year
-	 */
-  getDirectorInfo(name) {
-    const token = localStorage.getItem('token');
-    axios
-      .get(`https://myflixdb5253.herokuapp.com/directors/${name}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({ directorInfo: response.data });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
-
-  componentDidMount() {
-    this.getDirectorInfo(this.props.name);
-  }
-
+class MovieCard extends React.Component {
   render() {
-    const { directorInfo } = this.state;
+    const { movie } = this.props;
+
+    // cuts off long movie descriptions
+    const truncateString = (str, num) => {
+      if (str.length &lt;= 100) {
+        return str;
+      }
+      return str.slice(0, 110) + '...';
+    };
 
     return (
-      &lt;div className="director-view">
-        &lt;div className="director-name">
-          &lt;span className="label">Director Name: &lt;/span>
-          &lt;span className="value">{directorInfo.Name}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-bio">
-          &lt;span className="label">Biography: &lt;/span>
-          &lt;span className="value">{directorInfo.Bio}&lt;/span>
-        &lt;/div>
-        &lt;br />
-        &lt;div className="director-birth">
-          &lt;span className="label">Born: &lt;/span>
-          &lt;span className="value">{directorInfo.Birth}&lt;/span>
-        &lt;/div>
-
-        &lt;br />
-        &lt;Link to={`/`} className="home-button">
-          &lt;Button variant="link">Home&lt;/Button>
-        &lt;/Link>
+      &lt;div className="movie-cards">
+        &lt;Card text={'white'} className="movie-cards__item" bg={'dark'}>
+          &lt;div className="card-overlay">
+            &lt;Card.Img className="movie-card-img" variant="top" src={movie.ImagePath} />
+          &lt;/div>
+          &lt;Card.Body>
+            &lt;Card.Title className="movie-title__card">{movie.Title}&lt;/Card.Title>
+            &lt;Card.Text>{truncateString(movie.Description)}&lt;/Card.Text>
+            &lt;Link to={`/movies/${movie._id}`}>
+              &lt;Button className="more-details">More Details&lt;/Button>
+            &lt;/Link>
+          &lt;/Card.Body>
+        &lt;/Card>
       &lt;/div>
     );
   }
 }
 
-DirectorView.propTypes = {
-  name: PropTypes.string.isRequired,
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-export default connect(null, {})(DirectorView);
+export default connect(null, {})(MovieCard);
 </code></pre>
         </article>
     </section>

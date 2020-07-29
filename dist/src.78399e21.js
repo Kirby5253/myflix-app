@@ -51198,6 +51198,16 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/**
+ * displays the movie information in card form
+ * @class MovieCard
+ * @requires react
+ * @requires prop-types
+ * @requires react-bootstrap
+ * @requires './movie-card.scss'
+ * @requires react-router-dom
+ * @requires react-redux
+ */
 var MovieCard = /*#__PURE__*/function (_React$Component) {
   _inherits(MovieCard, _React$Component);
 
@@ -51212,7 +51222,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   _createClass(MovieCard, [{
     key: "render",
     value: function render() {
-      var movie = this.props.movie;
+      var movie = this.props.movie; // cuts off long movie descriptions
 
       var truncateString = function truncateString(str, num) {
         if (str.length <= 100) {
@@ -51526,6 +51536,16 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/**
+ * @class MovieView
+ * @requires react
+ * @requires react-bootstrap
+ * @requires prop-types
+ * @requires axios
+ * @requires react-redux
+ * @requires react-router-dom
+ * @requires './movie-view.scss'
+ */
 var MovieView = /*#__PURE__*/function (_React$Component) {
   _inherits(MovieView, _React$Component);
 
@@ -51537,6 +51557,31 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MovieView);
 
     _this = _super.call(this);
+
+    _this.handleAddFavorite = function (e) {
+      var _this$props = _this.props,
+          movie = _this$props.movie,
+          user = _this$props.user,
+          token = _this$props.token;
+      var storedUser = localStorage.getItem('user');
+
+      _axios.default.post("https://myflixdb5253.herokuapp.com/users/".concat(storedUser, "/Movies/").concat(movie._id), {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        var data = response.data;
+        console.log(data);
+        alert(movie.Title + ' has been added to favorites!');
+      }).catch(function (e) {
+        console.log(e);
+      });
+    };
+
     _this.state = {};
     return _this;
   }
@@ -51544,30 +51589,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
   _createClass(MovieView, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          user = _this$props.user,
-          token = _this$props.token;
-      var storedUser = localStorage.getItem('user');
-
-      var handleAddFavorite = function handleAddFavorite(e) {
-        _axios.default.post("https://myflixdb5253.herokuapp.com/users/".concat(storedUser, "/Movies/").concat(movie._id), {
-          headers: {
-            Authorization: "Bearer ".concat(token)
-          }
-        }, {
-          headers: {
-            Authorization: "Bearer ".concat(token)
-          }
-        }).then(function (response) {
-          var data = response.data;
-          console.log(data);
-          alert(movie.Title + ' has been added to favorites!');
-        }).catch(function (e) {
-          console.log(e);
-        });
-      };
-
+      var movie = this.props.movie;
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
@@ -51612,7 +51634,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         className: "value"
       }, movie.Director.Name)), _react.default.createElement("br", null), _react.default.createElement(_Button.default, {
         className: "movie-button",
-        onClick: handleAddFavorite,
+        onClick: this.handleAddFavorite,
         variant: "dark"
       }, "Add to Favorites"), _react.default.createElement("br", null), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
@@ -52764,6 +52786,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         this.getUserInfo(storedUser, accessToken);
       }
     }
+    /**
+     * saves the authorization data once a user has logged into the app, then loads the movies from db
+     * @function onLoggedIn
+     * @param {object} authData
+     */
+
   }, {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
@@ -52776,6 +52804,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.getMovies(authData.token);
       this.getUserInfo(authData.user.Username, authData.token);
     }
+    /**
+     * gets the movies from the api, called when user logs in
+     * @function getMovies
+     * @param {string} token token from local storage
+     */
+
   }, {
     key: "getMovies",
     value: function getMovies(token) {
@@ -52792,6 +52826,13 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         console.log(error);
       });
     }
+    /**
+     * gets the user's information from the api, called when user logs in
+     * @function getUserInfo
+     * @param {string} user name of the user
+     * @param {string} token token from local storage
+     */
+
   }, {
     key: "getUserInfo",
     value: function getUserInfo(user, token) {
@@ -52807,6 +52848,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         console.log(error);
       });
     }
+    /**
+     * this handles the logout and clearing of local storage when called
+     * @function logoutUser
+     * @param {string} user username
+     */
+
   }, {
     key: "logoutUser",
     value: function logoutUser(user) {
@@ -53146,7 +53193,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49650" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65072" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

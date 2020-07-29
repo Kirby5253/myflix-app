@@ -10,8 +10,9 @@ import { connect } from 'react-redux';
  * allows users to type in the id of their favorite movie to remove it from their account list
  * @function LoginView
  * @requires react
+ * @requires prop-types
  * @requires react-bootstrap/Form
- * @requires './change-favorites-view.scss'
+ * @requires react-bootstrap/Button
  * @requires axios
  * @requires react-router-dom
  * @requires react-redux

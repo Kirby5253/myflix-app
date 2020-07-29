@@ -1,10 +1,18 @@
 import React from 'react';
 import { Button, Container } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import './profile-view.scss';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+/**
+ * displays the users profile name, info, and options to update/change/delete profile
+ * @class MoviesList
+ * @requires react
+ * @requires react-redux
+ * @requires react-bootstrap
+ * @requires react-router-dom
+ * @requires './profile-view.scss'
+ */
 class ProfileView extends React.Component {
   constructor() {
     super();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: change-profile-view/change-profile-view.jsx</title>
+    <title>JSDoc: Source: registration-view/registration-view.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: change-profile-view/change-profile-view.jsx</h1>
+    <h1 class="page-title">Source: registration-view/registration-view.jsx</h1>
 
     
 
@@ -30,80 +30,78 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import './change-profile-view.scss';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 /**
- * allows users to type in the details that they want to change of their account
- * @function ChangeProfile
+ * allows users to type in the id of their favorite movie to remove it from their account list
+ * @function RegistrationView
  * @requires react
  * @requires react-bootstrap/Form
  * @requires react-bootstrap/Button
- * @requires './change-profile-view.scss'
  * @requires axios
- * @requires react-router-dom
  * @requires react-redux
  */
-function ChangeProfile(props) {
+function RegistrationView(props) {
+  const user = localStorage.getItem('user');
   const [newUsername, setNewUsername] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [newBirthDate, setNewBirthDate] = useState('');
-  const storedUser = localStorage.getItem('user');
-  const token = localStorage.getItem('token');
 
-  if (!storedUser) return null;
+  if (user) return null;
 
   /**
-	 * handles the put request to api to change user details
-	 * @function handleProfileUpdate
-	 * @params {string} new username
-	 * @params {string} new password
-	 * @params {string} new email
-	 * @params {string} new birthday
+	 * handles registering the user with a post request to the api
+	 * @param {string} Username Username needs a minimum of 5 alphanumeric characters
+	 * @param {string} Password Password needs at least 4 alphanumeric characters
+	 * @param {string} Email Email needs @ and .
+	 * @param {date} Birthday MM/DD/YYYY
 	 */
-  const handleProfileUpdate = (e) => {
+  const handleRegistrationSubmit = (e) => {
     e.preventDefault();
     /* Send a request to the server for authentication */
     axios
-      .put(
-        `https://myflixdb5253.herokuapp.com/users/${storedUser}`,
-        {
-          Username: newUsername,
-          Password: newPassword,
-          Email: newEmail,
-          Birthday: newBirthDate,
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      )
+      .post('https://myflixdb5253.herokuapp.com/users', {
+        Username: newUsername,
+        Password: newPassword,
+        Email: newEmail,
+        Birthday: newBirthDate,
+      })
       .then((response) => {
         const data = response.data;
         console.log(data);
-        alert('User info was successfully updated!');
-        window.open(`/client/profile/${newUsername}`, '_self'); // Self to open in the current window
-        localStorage.setItem('user', newUsername);
+        window.open('/client', '_self'); // Self to open in the current window
+        if (data) {
+          alert(
+            'User ' +
+              newUsername +
+              ' was successfully created. Please login with your new username and password.',
+          );
+        }
       })
       .catch((e) => {
-        alert('Error: User info was not updated. Please try again.');
-        console.log('error updating the user');
-        console.log(e);
+        console.log('error registering the user', e);
+        alert(
+          'User ' +
+            newUsername +
+            ' is already taken or one of the fields does not meet our membership criteria. Please try to create a new username and verify the information in each field for accuracy.',
+        );
       });
   };
 
+  const cancelRegistration = () => {
+    window.open('/client', '_self');
+  };
+
   return (
-    &lt;div className="update-form">
-      &lt;Form className="change-form">
+    &lt;div className="login-form">
+      &lt;Form className="register-form">
         &lt;Form.Label>
-          &lt;h3>
-            Update User Info&lt;br />
-          &lt;/h3>
+          &lt;h3 className="login-title">Create New User&lt;/h3>
         &lt;/Form.Label>
 
         &lt;Form.Group controlId="formBasicUsername">
-          &lt;Form.Label>New Username:&lt;/Form.Label>
+          &lt;Form.Label>Create Username:&lt;/Form.Label>
           &lt;Form.Control
             type="text"
             placeholder="Username"
@@ -114,12 +112,19 @@ function ChangeProfile(props) {
         &lt;/Form.Group>
         {newUsername.length &lt; 5 ? (
           &lt;div className="form-validation">
-            Please include a username with at least 5 characters.
+            Please create a username with at least 5 characters...
+          &lt;/div>
+        ) : (
+          &lt;div className="form-validation__good">Username meets all criteria!&lt;/div>
+        )}
+        {!newUsername &amp;&amp; newPassword ? (
+          &lt;div className="form-validation">
+            Please create a username...(Make sure to only use letters or numbers.)
           &lt;/div>
         ) : null}
 
         &lt;Form.Group controlId="formBasicPassword">
-          &lt;Form.Label>New Password:&lt;/Form.Label>
+          &lt;Form.Label>Create Password&lt;/Form.Label>
           &lt;Form.Control
             type="password"
             placeholder="Password"
@@ -130,22 +135,25 @@ function ChangeProfile(props) {
         &lt;/Form.Group>
         {newPassword.length &lt; 4 ? (
           &lt;div className="form-validation">
-            Please include a password with at least 4 characters.
+            Password is required and must contain at least 4 characters...
           &lt;/div>
-        ) : null}
+        ) : (
+          &lt;div className="form-validation__good">Password meets all criteria!&lt;/div>
+        )}
 
         &lt;Form.Group controlId="formBasicPassword">
-          &lt;Form.Label>New Email&lt;/Form.Label>
+          &lt;Form.Label>Email&lt;/Form.Label>
           &lt;Form.Control
             type="email"
             placeholder="Email"
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
-            required
           />
         &lt;/Form.Group>
-        {newEmail.length > 5 &amp;&amp; newEmail.includes('@') ? null : (
-          &lt;div className="form-validation">Please include a valid email.&lt;/div>
+        {newEmail.includes('@') ? (
+          &lt;div className="form-validation__good">Email meets all criteria!&lt;/div>
+        ) : (
+          &lt;div className="form-validation">Email is required...&lt;/div>
         )}
 
         &lt;Form.Group controlId="formBasicPassword">
@@ -155,10 +163,11 @@ function ChangeProfile(props) {
             placeholder="YYYY-MM-DD"
             value={newBirthDate}
             onChange={(e) => setNewBirthDate(e.target.value)}
-            required
           />
         &lt;/Form.Group>
-        {newBirthDate.length >= 8 ? null : (
+        {newBirthDate.length >= 8 ? (
+          &lt;div className="form-validation__good">Birthday meets all criteria!&lt;/div>
+        ) : (
           &lt;div className="form-validation">Birthday is required...&lt;/div>
         )}
 
@@ -168,26 +177,26 @@ function ChangeProfile(props) {
         newBirthDate.length >= 8 ? (
           &lt;Button
             className="register-button"
-            onClick={handleProfileUpdate}
             variant="primary"
             type="button"
+            onClick={handleRegistrationSubmit}
           >
-            Update Account
+            Register
           &lt;/Button>
         ) : (
-          &lt;Button variant="primary" type="button" className="disabled register-button">
-            Update Account
+          &lt;Button className="register-button disabled" variant="dark" type="button">
+            Register
           &lt;/Button>
         )}
-        &lt;Link to={`/profile/${storedUser}`}>
-          &lt;Button variant="link">Cancel Update&lt;/Button>
-        &lt;/Link>
+        &lt;Button className="login-button" variant="link" type="button" onClick={cancelRegistration}>
+          Already a user? Click here to sign in.
+        &lt;/Button>
       &lt;/Form>
     &lt;/div>
   );
 }
 
-export default connect(null, {})(ChangeProfile);
+export default connect(null, {})(RegistrationView);
 </code></pre>
         </article>
     </section>

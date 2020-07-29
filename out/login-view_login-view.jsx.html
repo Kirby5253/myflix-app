@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: change-favorites-view/change-favorites-view.jsx</title>
+    <title>JSDoc: Source: login-view/login-view.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: change-favorites-view/change-favorites-view.jsx</h1>
+    <h1 class="page-title">Source: login-view/login-view.jsx</h1>
 
     
 
@@ -27,85 +27,123 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './change-favorites-view.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 /**
  * allows users to type in the id of their favorite movie to remove it from their account list
- * @function ChangeFavorites
+ * @function LoginView
  * @requires react
+ * @requires prop-types
  * @requires react-bootstrap/Form
- * @requires './change-favorites-view.scss'
+ * @requires react-bootstrap/Button
  * @requires axios
  * @requires react-router-dom
  * @requires react-redux
  */
-function ChangeFavorites() {
-  const [favoriteId, confirmFavoriteId] = useState('');
+function LoginView(props) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const storedUser = localStorage.getItem('user');
-  const token = localStorage.getItem('token');
 
   /**
-	 * function that handles the put request to edit the user's favorite array
-	 * @function handleRemoveFavorite
+	 * handles the post to db to login user to app
+	 * @function handleSubmit
+	 * @param {*} e
 	 */
-  const handleRemoveFavorite = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    /* Send a request to the server for authentication */
     axios
-      .put(
-        `https://myflixdb5253.herokuapp.com/users/${storedUser}/Movies/${favoriteId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      )
+      .post('https://myflixdb5253.herokuapp.com/login', {
+        Username: username,
+        Password: password,
+      })
       .then((response) => {
         const data = response.data;
-        console.log(data);
-        alert(favoriteId + ' has been removed from favorites.');
-        location.reload();
+        props.onLoggedIn(data);
       })
       .catch((e) => {
-        console.log(e);
-        alert('Please input a valid Movie ID.');
+        console.log('no such user');
       });
   };
 
+  /**
+	 * allows user to push enter instead of clicking login
+	 * @function handleSubmitEnter
+	 */
+  const handleSubmitEnter = () => {
+    if (event.key === 'Enter') {
+      /* Send a request to the server for authentication */
+      axios
+        .post('https://myflixdb5253.herokuapp.com/login', {
+          Username: username,
+          Password: password,
+        })
+        .then((response) => {
+          const data = response.data;
+          props.onLoggedIn(data);
+        })
+        .catch((e) => {
+          console.log('no such user');
+        });
+    }
+  };
+
+  // auto login for returning users
+  if (storedUser) return null;
+
   return (
-    &lt;div className="remove-favorite">
-      &lt;h1 />
-      &lt;Form className="delete-fav">
-        &lt;Form.Group controlId="formRemoveFav">
-          &lt;Form.Label>Input the ID of the movies you wish to remove from favorites&lt;/Form.Label>
+    &lt;div className="login-form">
+      &lt;Form className>
+        &lt;Form.Label>
+          &lt;h3 className="login-title">Login to MyFlix&lt;/h3>
+        &lt;/Form.Label>
+        &lt;Form.Group controlId="formBasicUsername">
+          &lt;Form.Label>Username:&lt;/Form.Label>
           &lt;Form.Control
             type="text"
-            placeholder="Movie ID"
-            value={favoriteId}
-            onChange={(e) => confirmFavoriteId(e.target.value)}
-            required
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         &lt;/Form.Group>
-        &lt;Button onClick={handleRemoveFavorite} variant="primary" type="button">
-          Update Favorites
+
+        &lt;Form.Group controlId="formBasicPassword">
+          &lt;Form.Label>Password&lt;/Form.Label>
+          &lt;Form.Control
+            onKeyPress={handleSubmitEnter}
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        &lt;/Form.Group>
+        &lt;br />
+        &lt;Button variant="dark" className="login-button" type="button" onClick={handleSubmit}>
+          Login
         &lt;/Button>
-        &lt;Link to={`/profile/${storedUser}`}>
-          &lt;Button variant="link">Cancel Update&lt;/Button>
+        &lt;Link to={`/register`}>
+          &lt;Button variant="link" className="login-button" type="button">
+            New to MyFlix? Click here to create an account
+          &lt;/Button>
         &lt;/Link>
+        &lt;br />
       &lt;/Form>
     &lt;/div>
   );
 }
 
-let mapStateToProps = (state) => {
-  return { user: state.userInfo };
+LoginView.propTypes = {
+  setUsername: PropTypes.string,
+  setPassword: PropTypes.string,
 };
 
-export default connect(mapStateToProps, {})(ChangeFavorites);
+export default connect(null, {})(LoginView);
 </code></pre>
         </article>
     </section>
