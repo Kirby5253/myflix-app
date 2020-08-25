@@ -51181,7 +51181,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -51194,6 +51194,10 @@ var _reactRouterDom = require("react-router-dom");
 var _reactRedux = require("react-redux");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -51233,43 +51237,62 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MovieCard);
 
   function MovieCard() {
+    var _this;
+
     _classCallCheck(this, MovieCard);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this);
+    _this.state = {
+      isHovered: false
+    };
+    _this.handleHover = _this.handleHover.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(MovieCard, [{
+    key: "handleHover",
+    value: function handleHover() {
+      this.setState(function (prevState) {
+        return {
+          isHovered: !prevState.isHovered
+        };
+      });
+      console.log(this.state.isHovered);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var movie = this.props.movie; // cuts off long movie descriptions
-
-      var truncateString = function truncateString(str, num) {
-        if (str.length <= 100) {
-          return str;
-        }
-
-        return str.slice(0, 110) + '...';
-      };
+      var movie = this.props.movie; // // cuts off long movie descriptions
+      // const truncateString = (str, num) => {
+      //   if (str.length <= 100) {
+      //     return str;
+      //   }
+      //   return str;
+      // };
 
       return _react.default.createElement("div", {
         className: "movie-cards"
       }, _react.default.createElement(_reactBootstrap.Card, {
         text: 'white',
         className: "movie-cards__item",
-        bg: 'dark'
+        bg: 'dark',
+        onMouseEnter: this.handleHover,
+        onMouseLeave: this.handleHover
       }, _react.default.createElement("div", {
         className: "card-overlay"
       }, _react.default.createElement(_reactBootstrap.Card.Img, {
         className: "movie-card-img",
         variant: "top",
         src: movie.ImagePath
-      })), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Title, {
+      })), this.state.isHovered ? _react.default.createElement(_reactBootstrap.Card.Body, {
+        className: "card-body card-body__reveal"
+      }, _react.default.createElement(_reactBootstrap.Card.Title, {
         className: "movie-title__card"
-      }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, null, truncateString(movie.Description)), _react.default.createElement(_reactRouterDom.Link, {
+      }, movie.Title), _react.default.createElement(_reactBootstrap.Card.Text, null, movie.Description), _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_reactBootstrap.Button, {
         className: "more-details"
-      }, "More Details")))));
+      }, "More Details"))) : null));
     }
   }]);
 
@@ -53345,7 +53368,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51012" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52730" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

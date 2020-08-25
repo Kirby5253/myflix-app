@@ -1,23 +1,24 @@
 .movie-title__card {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
   margin-top: -12px;
 }
 
 .movie-cards {
   margin-top: 10px;
   place-self: center;
+  transition: ease 0.3s;
 }
 
 .movie-cards__item {
-  width: 15rem;
-  height: 38rem;
+  width: 300px;
 }
 
 .more-details {
   position: absolute;
   bottom: 10px;
-  left: 60px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .more-details:hover {
@@ -28,9 +29,14 @@
 
 .grid {
   margin-top: 11px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: baseline;
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.grid .movie-cards {
+  margin: 10px auto;
 }
 
 .filter {
@@ -39,7 +45,23 @@
 }
 
 .card-text {
-  margin-top: -10px;
+  margin-top: 20px;
+}
+
+.card-body {
+  position: absolute;
+  background: #343a40ce;
+  height: 100%;
+  animation: fadeIn ease 0.4s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .movie-view {
   margin: 20px;
