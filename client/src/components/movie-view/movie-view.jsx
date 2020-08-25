@@ -43,15 +43,47 @@ class MovieView extends React.Component {
       .then((response) => {
         const data = response.data;
         console.log(data);
-        alert(movie.Title + ' has been added to favorites!');
+        this.props.filterMovies;
+        location.reload();
       })
       .catch((e) => {
         console.log(e);
       });
   };
 
+  /**
+	 * function that handles the put request to edit the user's favorite array
+	 * @function handleRemoveFavorite
+	 */
+  handleRemoveFavorite = () => {
+    const { movie, token, moviesFavList } = this.props;
+    const storedUser = localStorage.getItem('user');
+    axios
+      .put(
+        `https://myflixdb5253.herokuapp.com/users/${storedUser}/Movies/${movie._id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        this.props.filterMovies;
+        location.reload();
+      })
+      .catch((e) => {
+        console.log(e);
+        alert('Please input a valid Movie ID.');
+      });
+  };
+
   render() {
-    const { movie } = this.props;
+    const { movie, userFavorites, moviesFavList } = this.props;
+
+    console.log(userFavorites);
 
     if (!movie) return null;
 
@@ -88,9 +120,25 @@ class MovieView extends React.Component {
         </div>
 
         <br />
-        <Button className="movie-button" onClick={this.handleAddFavorite} variant="dark">
-          Add to Favorites
-        </Button>
+
+        {moviesFavList.includes(movie.Title) ? (
+          <Button
+            className="movie-button favorite__remove"
+            onClick={this.handleRemoveFavorite}
+            variant="dark"
+          >
+            Remove from Favorites
+          </Button>
+        ) : (
+          <Button
+            className="movie-button favorite__add"
+            onClick={this.handleAddFavorite}
+            variant="dark"
+          >
+            Add to Favorites
+          </Button>
+        )}
+
         <br />
 
         <Link to={`/`}>
@@ -114,4 +162,8 @@ MovieView.propTypes = {
   }),
 };
 
-export default connect(null, {})(MovieView);
+let mapStateToProps = (state) => {
+  return { movies: state.movies, userInfo: state.userInfo, userFavorites: state.userFavorites };
+};
+
+export default connect(mapStateToProps, {})(MovieView);

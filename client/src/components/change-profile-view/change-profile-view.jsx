@@ -106,7 +106,7 @@ function ChangeProfile(props) {
           </div>
         ) : null}
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formBasicEmail">
           <Form.Label>New Email</Form.Label>
           <Form.Control
             type="email"
@@ -120,7 +120,7 @@ function ChangeProfile(props) {
           <div className="form-validation">Please include a valid email.</div>
         )}
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formBasicBirthday">
           <Form.Label>Date of Birth</Form.Label>
           <Form.Control
             type="date"

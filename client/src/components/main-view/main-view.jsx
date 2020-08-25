@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // defined actions
-import { setMovies, setUserInfo } from '../../actions/actions';
+import { setMovies, setUserInfo, setUserFavorites } from '../../actions/actions';
 // components
 import MoviesList from '../movies-list/movies-list';
 import LoginView from '../login-view/login-view';
@@ -47,6 +47,7 @@ class MainView extends React.Component {
 
     this.state = {
       user: null,
+      moviesFavList: [],
     };
   }
 
@@ -61,6 +62,10 @@ class MainView extends React.Component {
       this.getMovies(accessToken);
       this.getUserInfo(storedUser, accessToken);
     }
+
+    document.addEventListener('click', () => {
+      this.filterMoviesList();
+    });
   }
 
   /**
@@ -112,6 +117,7 @@ class MainView extends React.Component {
       })
       .then((response) => {
         this.props.setUserInfo(response.data);
+        this.filterMoviesList();
       })
       .catch(function(error) {
         console.log(error);
@@ -119,21 +125,43 @@ class MainView extends React.Component {
   }
 
   /**
+   * filters the user's fav movies from movie array
+   * @function filterMoviesList
+   */
+  filterMoviesList() {
+    let userFavorites = this.props.userInfo.Favorite_Movies;
+    let movies = this.props.movies;
+
+    var i;
+    if (userFavorites) {
+      for (i = 0; i < movies.length; i++) {
+        if (
+          userFavorites.includes(movies[i]._id) &&
+          !this.state.moviesFavList.includes(movies[i].Title)
+        ) {
+          this.state.moviesFavList.push(movies[i].Title);
+        }
+      }
+    }
+    this.props.setUserFavorites(this.state.moviesFavList);
+    console.log('movies-filtered', this.state.moviesFavList);
+  }
+
+  /**
    * this handles the logout and clearing of local storage when called
    * @function logoutUser
-   * @param {string} user username
    */
-  logoutUser(user) {
+  logoutUser() {
     this.props.setUserInfo(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
 
   render() {
-    let { movies, userInfo } = this.props;
+    let { movies, userInfo, userFavorites } = this.props;
     // If the state isn't initialized, this will throw on runtime
     // before the data is initially loaded
-    const { user } = this.state;
+    const { user, moviesFavList } = this.state;
     const storedUser = localStorage.getItem('user');
 
     return (
@@ -150,7 +178,7 @@ class MainView extends React.Component {
                 <Nav className="mr-auto">
                   <Nav.Link href="/client/">Movies</Nav.Link>
                   <Nav.Link href={`/client/profile/${user}`}>Account</Nav.Link>
-                  <Nav.Link onClick={(user) => this.logoutUser()} href="/client">
+                  <Nav.Link onClick={() => this.logoutUser()} href="/client">
                     Logout
                   </Nav.Link>
                 </Nav>
@@ -203,7 +231,9 @@ class MainView extends React.Component {
               render={({ match }) => {
                 // Users can only see their own account info!
                 if (match.params.username === storedUser)
-                  return <ProfileView user={userInfo} movies={movies} />;
+                  return (
+                    <ProfileView userFavorites={userFavorites} user={userInfo} movies={movies} />
+                  );
               }}
             />
 
@@ -241,9 +271,9 @@ class MainView extends React.Component {
               path="/movies/:movieId"
               render={({ match }) => (
                 <MovieView
-                  addToFav={() => this.addToFav(user)}
+                  filterMoviesList={this.filterMoviesList}
+                  moviesFavList={moviesFavList}
                   movie={movies.find((m) => m._id === match.params.movieId)}
-                  user={userInfo}
                   token={localStorage.getItem('token')}
                 />
               )}
@@ -278,7 +308,7 @@ MainView.propTypes = {
 };
 
 let mapStateToProps = (state) => {
-  return { movies: state.movies, userInfo: state.userInfo };
+  return { movies: state.movies, userInfo: state.userInfo, userFavorites: state.userFavorites };
 };
 
-export default connect(mapStateToProps, { setMovies, setUserInfo })(MainView);
+export default connect(mapStateToProps, { setMovies, setUserInfo, setUserFavorites })(MainView);
